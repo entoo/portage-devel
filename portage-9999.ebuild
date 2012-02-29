@@ -62,7 +62,7 @@ prefix_src_archives() {
 	done
 }
 
-EGIT_REPO_URI="git://git.overlays.gentoo.org/proj/portage.git"
+EGIT_REPO_URI="https://github.com/entoo/portage-src.git"
 S="${WORKDIR}"/${PN}
 
 compatible_python_is_selected() {
