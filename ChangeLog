@@ -1,0 +1,1762 @@
+# ChangeLog for sys-apps/portage
+# Copyright 1999-2012 Gentoo Foundation; Distributed under the GPL v2
+# $Header: /var/cvsroot/gentoo-x86/sys-apps/portage/ChangeLog,v 1.971 2012/02/23 06:08:11 zmedico Exp $
+
+*portage-2.2.0_alpha89 (23 Feb 2012)
+
+  23 Feb 2012; Zac Medico <zmedico@gentoo.org> +portage-2.2.0_alpha89.ebuild:
+  2.2.0_alpha89 version bump. This includes all of the fixes in
+  portage-2.1.10.49. Bug #210077 tracks all bugs fixed since portage-2.1.x.
+
+*portage-2.1.10.49 (23 Feb 2012)
+
+  23 Feb 2012; Zac Medico <zmedico@gentoo.org> +portage-2.1.10.49.ebuild:
+  2.1.10.49 version bump. This fixes bug #384397 (remove orphan symlinks to
+  directories) and bug #405327 (erroneous rename of absolute symlink to
+  symlink.bz2). Bug #402213 tracks all bugs fixed since portage-2.1.10.44.
+
+  23 Feb 2012; Zac Medico <zmedico@gentoo.org> -portage-2.1.10.41.ebuild,
+  -portage-2.1.10.46.ebuild, -portage-2.2.0_alpha86.ebuild:
+  Remove old versions.
+
+  21 Feb 2012; Zac Medico <zmedico@gentoo.org> portage-2.1.10.46.ebuild,
+  portage-2.1.10.48.ebuild:
+  Bug #402215: Re-add ~alpha, ~m68k, ~mips, and ~s390 keywords, since the
+  corresponding arch profiles now have USE=xattr masked for sys-apps/portage,
+  pending ~arch keywords for dev-python/pyxattr.
+
+  20 Feb 2012; Zac Medico <zmedico@gentoo.org> portage-2.2.0_alpha88.ebuild:
+  Fix SRC_URI.
+
+*portage-2.2.0_alpha88 (20 Feb 2012)
+
+  20 Feb 2012; Zac Medico <zmedico@gentoo.org> +portage-2.2.0_alpha88.ebuild,
+  -portage-2.2.0_alpha87.ebuild:
+  2.2.0_alpha88 version bump. This includes all of the fixes in
+  portage-2.1.10.48. Bug #210077 tracks all bugs fixed since portage-2.1.x.
+
+*portage-2.1.10.48 (20 Feb 2012)
+
+  20 Feb 2012; Zac Medico <zmedico@gentoo.org> +portage-2.1.10.48.ebuild,
+  -portage-2.1.10.47.ebuild:
+  2.1.10.48 version bump. This fixes bug #404995 (regression in 2.1.10.47 and
+  2.2.0_alpha87 which causes an infinite loop in emerge when parallel-fetch is
+  running and it is supposed to exit due to a build failure). Bug #402213 tracks
+  all bugs fixed since portage-2.1.10.44.
+
+  18 Feb 2012; Zac Medico <zmedico@gentoo.org> portage-2.1.10.41.ebuild,
+  portage-2.1.10.44.ebuild, portage-2.1.10.46.ebuild, portage-2.1.10.47.ebuild,
+  portage-2.2.0_alpha84.ebuild, portage-2.2.0_alpha86.ebuild,
+  portage-2.2.0_alpha87.ebuild, portage-9999.ebuild:
+  Remove special USE=build python dependencies, since they no longer function
+  correctly as reported in bug #399331.
+
+*portage-2.2.0_alpha87 (18 Feb 2012)
+
+  18 Feb 2012; Zac Medico <zmedico@gentoo.org> +portage-2.2.0_alpha87.ebuild,
+  -portage-2.2.0_alpha85.ebuild:
+  2.2.0_alpha87 version bump. This includes all of the fixes in
+  portage-2.1.10.47. Bug #210077 tracks all bugs fixed since portage-2.1.x.
+
+*portage-2.1.10.47 (18 Feb 2012)
+
+  18 Feb 2012; Zac Medico <zmedico@gentoo.org> +portage-2.1.10.47.ebuild,
+  -portage-2.1.10.45.ebuild:
+  2.1.10.47 version bump. This fixes bug #402339 (repoman check for env-update
+  calls) and bug #403705 (repoman copyright header check not working). It also
+  has PyPy support which can by enabled with USE=pypy1_8 (puts pypy-c1.8 in
+  portage shebangs). Bug #402213 tracks all bugs fixed since portage-2.1.10.44.
+
+  14 Feb 2012; Zac Medico <zmedico@gentoo.org> portage-9999.ebuild:
+  Require pypy[bzip2], for quickpkg.
+
+  14 Feb 2012; Zac Medico <zmedico@gentoo.org> metadata.xml,
+  portage-9999.ebuild:
+  Add support for USE=pypy1_8.
+
+*portage-2.2.0_alpha86 (12 Feb 2012)
+
+  12 Feb 2012; Zac Medico <zmedico@gentoo.org> +portage-2.2.0_alpha86.ebuild:
+  2.2.0_alpha86 version bump. This includes all of the fixes in
+  portage-2.1.10.46. Bug #210077 tracks all bugs fixed since portage-2.1.x.
+
+*portage-2.1.10.46 (12 Feb 2012)
+
+  12 Feb 2012; Zac Medico <zmedico@gentoo.org> +portage-2.1.10.46.ebuild:
+  2.1.10.46 version bump. This fixes bug #398009 (disable repoman ChangeLog
+  creation for Manifest-only commits, unless --echangelog=force), bug #401919
+  (handle POLLHUP race condition that triggers high emerge cpu usage), bug
+  #402335 (fix emerge to avoid hitting recursion limit in rare cases), bug
+  #403149 (validate file names in the xpak segments of binary packages), and bug
+  #403181 (FEATURES=no{doc,info,man} breakage in portage-2.1.10.45 and
+  2.2.0_alpha85). Bug #402213 tracks all bugs fixed since portage-2.1.10.44.
+
+  05 Feb 2012; Zac Medico <zmedico@gentoo.org> portage-2.1.10.45.ebuild,
+  portage-2.2.0_alpha85.ebuild, portage-9999.ebuild:
+  Add preinst ewarn message for USE=xattr if pyxattr is not installed.
+
+  04 Feb 2012; Zac Medico <zmedico@gentoo.org> -portage-2.1.10.11.ebuild,
+  -portage-2.2.0_alpha81.ebuild:
+  Remove old versions.
+
+*portage-2.2.0_alpha85 (04 Feb 2012)
+
+  04 Feb 2012; Zac Medico <zmedico@gentoo.org> +portage-2.2.0_alpha85.ebuild:
+  2.2.0_alpha85 version bump. This includes all of the fixes in
+  portage-2.1.10.45. Bug #210077 tracks all bugs fixed since portage-2.1.x.
+
+*portage-2.1.10.45 (04 Feb 2012)
+
+  04 Feb 2012; Zac Medico <zmedico@gentoo.org> +portage-2.1.10.45.ebuild:
+  2.1.10.45 version bump. This fixes bug #269410 (add --human-readable to rsync
+  opts), bug #333687 (repoman support for git commit --gpg-sign), bug #397415
+  (fix REQUIRED_USE sample in ebuild.5), bug #398543 (add ./ to quickpkg file
+  names), bug #398587 (handle unicode in overlay path), bug #399595 (erroneous
+  rename of html dir symlink to html.bz2), bug #402099 (honor repos.conf
+  priority settings), and bug #400679 (handle rm failure for info dir files).
+  Bug #402213 tracks all bugs fixed since portage-2.1.10.44.
+
+  02 Feb 2012; Samuli Suominen <ssuominen@gentoo.org> portage-2.1.10.44.ebuild:
+  ppc64 stable wrt #400559
+
+  01 Feb 2012; Brent Baude <ranger@gentoo.org> portage-2.1.10.44.ebuild:
+  Marking portage-2.1.10.44 ppc for bug 400559
+
+  31 Jan 2012; Jeroen Roovers <jer@gentoo.org> portage-2.1.10.44.ebuild:
+  Stable for HPPA (bug #400559).
+
+  28 Jan 2012; Raúl Porcel <armin76@gentoo.org> portage-2.1.10.44.ebuild:
+  alpha/arm/ia64/m68k/s390/sh/sparc stable wrt #400559
+
+  28 Jan 2012; Pawel Hajdan jr <phajdan.jr@gentoo.org>
+  portage-2.1.10.44.ebuild:
+  x86 stable wrt bug #400559
+
+  26 Jan 2012; Agostino Sarubbo <ago@gentoo.org> portage-2.1.10.44.ebuild:
+  Stable for AMD64, wrt bug #400559
+
+  15 Jan 2012; Raúl Porcel <armin76@gentoo.org> portage-2.1.10.41.ebuild:
+  sh stable
+
+  04 Jan 2012; Brent Baude <ranger@gentoo.org> portage-2.1.10.41.ebuild:
+  Marking portage-2.1.10.41 ppc for bug 394695
+
+  01 Jan 2012; Raúl Porcel <armin76@gentoo.org> portage-2.1.10.41.ebuild:
+  ia64/m68k/s390/sh/sparc stable wrt #394695
+
+  29 Dec 2011; Zac Medico <zmedico@gentoo.org> -portage-2.1.10.43.ebuild,
+  -portage-2.2.0_alpha83.ebuild:
+  Remove old versions.
+
+*portage-2.2.0_alpha84 (28 Dec 2011)
+
+  28 Dec 2011; Zac Medico <zmedico@gentoo.org> +portage-2.2.0_alpha84.ebuild:
+  2.2.0_alpha84 version bump. This includes all of the fixes in
+  portage-2.1.10.44. Bug #210077 tracks all bugs fixed since portage-2.1.x.
+
+*portage-2.1.10.44 (28 Dec 2011)
+
+  28 Dec 2011; Zac Medico <zmedico@gentoo.org> +portage-2.1.10.44.ebuild:
+  2.1.10.44 version bump. This fixes bug #395995 (later repoman --ask prompt)
+  and also fixes a regression since portage-2.1.10.42 and 2.2.0_alpha82 which
+  caused layout.conf settings to be ignored for repositories that had settings
+  in repos.conf. Bug #395831 tracks all bugs fixed since portage-2.1.10.41.
+
+*portage-2.2.0_alpha83 (24 Dec 2011)
+
+  24 Dec 2011; Zac Medico <zmedico@gentoo.org> +portage-2.2.0_alpha83.ebuild,
+  -portage-2.2.0_alpha82.ebuild:
+  2.2.0_alpha83 version bump. This includes all of the fixes in
+  portage-2.1.10.43. Bug #210077 tracks all bugs fixed since portage-2.1.x.
+
+*portage-2.1.10.43 (24 Dec 2011)
+
+  24 Dec 2011; Zac Medico <zmedico@gentoo.org> +portage-2.1.10.43.ebuild,
+  -portage-2.1.10.42.ebuild:
+  2.1.10.43 version bump. This fixes bug #395877 (false positive results in
+  CFLAGS ignorance check) and bug #395879 (emerge AttributeError triggered by
+  ambiguous atom argument, a regression in portage-2.1.10.42 and 2.2.0_alpha82).
+  Also included is a new config-protect-if-modified FEATURES setting (see the
+  make.conf man page). Bug #395831 tracks all bugs fixed since
+  portage-2.1.10.41.
+
+*portage-2.2.0_alpha82 (23 Dec 2011)
+
+  23 Dec 2011; Zac Medico <zmedico@gentoo.org> +portage-2.2.0_alpha82.ebuild:
+  2.2.0_alpha82 version bump. This includes all of the fixes in
+  portage-2.1.10.42. Bug #210077 tracks all bugs fixed since portage-2.1.x.
+
+*portage-2.1.10.42 (23 Dec 2011)
+
+  23 Dec 2011; Zac Medico <zmedico@gentoo.org> +portage-2.1.10.42.ebuild:
+  2.1.10.42 version bump. This fixes bug #390489 (export COLUMNS variable so
+  java-utils-2.eclass doesn't die in java-pkg_init when stdin is not a tty), bug
+  #394091 (export valid COLUMNS variable so perl doesn't die when output is
+  redirected), bug #394995 (InvalidDependString triggered by REQUIRED_USE
+  containing a flag not in IUSE), and bug #395705 (OSError: [Errno 121] Remote
+  I/O error when PORTAGE_RO_DISTDIRS refers to NFS). Bug #395831 tracks all bugs
+  fixed since portage-2.1.10.41.
+
+  23 Dec 2011; Zac Medico <zmedico@gentoo.org> -portage-2.1.9.42.ebuild,
+  -portage-2.2.0_alpha51.ebuild:
+  Remove old versions.
+
+  22 Dec 2011; Matt Turner <mattst88@gentoo.org> portage-2.1.10.41.ebuild:
+  alpha stable, bug #394695.
+
+  22 Dec 2011; Zac Medico <zmedico@gentoo.org> portage-9999.ebuild:
+  Adjust make.globals PORTDIR and PORTAGE_TMPDIR for prefix installs.
+
+  21 Dec 2011; Markus Meier <maekke@gentoo.org> portage-2.1.10.41.ebuild:
+  arm stable, bug #394695
+
+  19 Dec 2011; Jeroen Roovers <jer@gentoo.org> portage-2.1.10.41.ebuild:
+  Stable for HPPA (bug #394695).
+
+  18 Dec 2011; Agostino Sarubbo <ago@gentoo.org> portage-2.1.10.41.ebuild:
+  Stable for X86/AMD64, wrt bug #394695
+
+  18 Dec 2011; Zac Medico <zmedico@gentoo.org> -portage-2.1.10.40.ebuild,
+  -portage-2.2.0_alpha80.ebuild:
+  Remove old versions.
+
+  14 Dec 2011; Zac Medico <zmedico@gentoo.org> portage-2.1.10.41.ebuild:
+  Remove obsolete elog message about --quiet-build.
+
+*portage-2.2.0_alpha81 (14 Dec 2011)
+
+  14 Dec 2011; Zac Medico <zmedico@gentoo.org> +portage-2.2.0_alpha81.ebuild,
+  -portage-2.2.0_alpha79.ebuild:
+  2.2.0_alpha81 version bump. This includes all of the fixes in
+  portage-2.1.10.41. Bug #210077 tracks all bugs fixed since portage-2.1.x.
+
+*portage-2.1.10.41 (14 Dec 2011)
+
+  14 Dec 2011; Zac Medico <zmedico@gentoo.org> +portage-2.1.10.41.ebuild,
+  -portage-2.1.10.39.ebuild:
+  2.1.10.41 version bump. This fixes bug #390523 (revert emerge --quiet-build
+  default, as Gentoo's council has decided) and bug #394195 (use hardlinks to
+  simulate locks on filesystems that don't support real locks). Bug #381649
+  tracks all bugs fixed since portage-2.1.10.11.
+
+  11 Dec 2011; Zac Medico <zmedico@gentoo.org> portage-2.2.0_alpha80.ebuild,
+  portage-9999.ebuild:
+  For prefix installs, add EPREFIX to *_BINARY constants.
+
+*portage-2.2.0_alpha80 (11 Dec 2011)
+
+  11 Dec 2011; Zac Medico <zmedico@gentoo.org> +portage-2.2.0_alpha80.ebuild:
+  2.2.0_alpha80 version bump. This includes all of the fixes in
+  portage-2.1.10.40. There is also support for two additional features which
+  include FEATURES=xattr (preserve extended attributes when merging files) and
+  FEATURES=force-prefix (emulation of the "Gentoo Prefix" branch of portage).
+  Bug #210077 tracks all bugs fixed since portage-2.1.x.
+
+*portage-2.1.10.40 (11 Dec 2011)
+
+  11 Dec 2011; Zac Medico <zmedico@gentoo.org> +portage-2.1.10.40.ebuild:
+  2.1.10.40 version bump. This fixes bug #393517 (document the relationship
+  between emerge --package-moves and fixpackages) and bug #394091 (portage sets
+  COLUMNS=-1 when output is redirected). Bug #381649 tracks all bugs fixed since
+  portage-2.1.10.11.
+
+  10 Dec 2011; Zac Medico <zmedico@gentoo.org> portage-9999.ebuild:
+  Add USE=xattr and corresponding deps.
+
+  09 Dec 2011; Zac Medico <zmedico@gentoo.org> portage-9999.ebuild:
+  Adjust SYNC in make.globals for prefix installs.
+
+  09 Dec 2011; Zac Medico <zmedico@gentoo.org> portage-9999.ebuild:
+  Enable FEATURES=force-prefix in make.globals for prefix installs.
+
+  08 Dec 2011; Zac Medico <zmedico@gentoo.org> portage-9999.ebuild:
+  Add support for prefix installs.
+
+  29 Nov 2011; Zac Medico <zmedico@gentoo.org> -portage-2.1.10.38.ebuild,
+  -portage-2.2.0_alpha78.ebuild:
+  Remove old versions.
+
+*portage-2.2.0_alpha79 (27 Nov 2011)
+
+  27 Nov 2011; Zac Medico <zmedico@gentoo.org> +portage-2.2.0_alpha79.ebuild:
+  2.2.0_alpha79 version bump. This includes all of the fixes in
+  portage-2.1.10.39. Bug #210077 tracks all bugs fixed since portage-2.1.x.
+
+*portage-2.1.10.39 (27 Nov 2011)
+
+  27 Nov 2011; Zac Medico <zmedico@gentoo.org> +portage-2.1.10.39.ebuild:
+  2.1.10.39 version bump. This fixes bug #392059 (emerge KeyError triggered by
+  unsatisfied dependencies). Bug #381649 tracks all bugs fixed since
+  portage-2.1.10.11.
+
+  27 Nov 2011; Zac Medico <zmedico@gentoo.org> -portage-2.1.10.37.ebuild,
+  -portage-2.2.0_alpha77.ebuild:
+  Remove old versions.
+
+*portage-2.2.0_alpha78 (26 Nov 2011)
+
+  26 Nov 2011; Zac Medico <zmedico@gentoo.org> +portage-2.2.0_alpha78.ebuild:
+  2.2.0_alpha78 version bump. This includes all of the fixes in
+  portage-2.1.10.38. Bug #210077 tracks all bugs fixed since portage-2.1.x.
+
+*portage-2.1.10.38 (26 Nov 2011)
+
+  26 Nov 2011; Zac Medico <zmedico@gentoo.org> +portage-2.1.10.38.ebuild:
+  2.1.10.38 version bump. This fixes bug #390965 (one-character messages from
+  the elog syslog module) and also fixes a regression in make.defaults
+  inheritance of variables from make.globals (such as PORTAGE_ELOG_CLASSES). Bug
+  #381649 tracks all bugs fixed since portage-2.1.10.11.
+
+  24 Nov 2011; Zac Medico <zmedico@gentoo.org> -portage-2.1.10.36.ebuild,
+  -portage-2.2.0_alpha76.ebuild:
+  Remove old versions.
+
+*portage-2.2.0_alpha77 (21 Nov 2011)
+
+  21 Nov 2011; Zac Medico <zmedico@gentoo.org> +portage-2.2.0_alpha77.ebuild,
+  -portage-2.2.0_alpha74.ebuild, -portage-2.2.0_alpha75.ebuild:
+  2.2.0_alpha77 version bump. This includes all of the fixes in
+  portage-2.1.10.37. Bug #210077 tracks all bugs fixed since portage-2.1.x.
+
+*portage-2.1.10.37 (21 Nov 2011)
+
+  21 Nov 2011; Zac Medico <zmedico@gentoo.org> +portage-2.1.10.37.ebuild,
+  -portage-2.1.10.34.ebuild, -portage-2.1.10.35.ebuild:
+  2.1.10.37 version bump. This fixes bug #391199 (repoman "abiguous workdir"
+  error when using <=subversion-1.6). Bug #381649 tracks all bugs fixed since
+  portage-2.1.10.11.
+
+*portage-2.2.0_alpha76 (19 Nov 2011)
+
+  19 Nov 2011; Zac Medico <zmedico@gentoo.org> +portage-2.2.0_alpha76.ebuild:
+  2.2.0_alpha76 version bump. This includes all of the fixes in
+  portage-2.1.10.36. Bug #210077 tracks all bugs fixed since portage-2.1.x.
+
+*portage-2.1.10.36 (19 Nov 2011)
+
+  19 Nov 2011; Zac Medico <zmedico@gentoo.org> +portage-2.1.10.36.ebuild:
+  2.1.10.36 version bump. This fixes bug #390833 (KeyError triggered by \r
+  characters in elog messages) and bug #390893 (emerge --changelog displays
+  entry for currently installed version). Bug #381649 tracks all bugs fixed
+  since portage-2.1.10.11.
+
+*portage-2.2.0_alpha75 (17 Nov 2011)
+
+  17 Nov 2011; Zac Medico <zmedico@gentoo.org> +portage-2.2.0_alpha75.ebuild:
+  2.2.0_alpha75 version bump. This includes all of the fixes in
+  portage-2.1.10.35. Bug #210077 tracks all bugs fixed since portage-2.1.x.
+
+*portage-2.1.10.35 (17 Nov 2011)
+
+  17 Nov 2011; Zac Medico <zmedico@gentoo.org> +portage-2.1.10.35.ebuild,
+  -portage-2.1.10.32.ebuild, -portage-2.2.0_alpha72.ebuild:
+  2.1.10.35 version bump. This fixes bug #390711 (clean up previous build prior
+  to pkg_pretend) and bug #390699 (support HOSTNAME variable for emerge quiet
+  mode xterm titles). Bug #381649 tracks all bugs fixed since portage-2.1.10.11.
+
+  12 Nov 2011; Zac Medico <zmedico@gentoo.org> metadata.xml,
+  portage-2.1.10.11.ebuild, portage-2.1.10.32.ebuild, portage-2.1.10.34.ebuild,
+  portage-2.1.6.13.ebuild, portage-2.1.6.7.ebuild, portage-2.1.9.42.ebuild,
+  portage-2.2.0_alpha51.ebuild, portage-2.2.0_alpha72.ebuild,
+  portage-2.2.0_alpha74.ebuild, portage-9999.ebuild:
+  Use the metadata.xml upstream doc element to reference the 'Working with
+  Portage' section of the handbook, instead of calling einfo every time that
+  portage is installed.
+
+  12 Nov 2011; Zac Medico <zmedico@gentoo.org> portage-2.2.0_alpha51.ebuild,
+  portage-2.2.0_alpha72.ebuild, portage-2.2.0_alpha74.ebuild,
+  portage-9999.ebuild:
+  Remove unconditional elog messages that suggest to use the 'latest development
+  version' of portage. There's no point in displaying this every time,
+  especially now that the portage-9999 ebuild is available.
+
+*portage-2.2.0_alpha74 (11 Nov 2011)
+
+  11 Nov 2011; Zac Medico <zmedico@gentoo.org> +portage-2.2.0_alpha74.ebuild,
+  -portage-2.2.0_alpha73.ebuild:
+  2.2.0_alpha74 version bump. This includes the --quiet-build change that's in
+  portage-2.1.10.34. Bug #210077 tracks all bugs fixed since portage-2.1.x.
+
+*portage-2.1.10.34 (11 Nov 2011)
+
+  11 Nov 2011; Zac Medico <zmedico@gentoo.org> +portage-2.1.10.34.ebuild,
+  -portage-2.1.10.33.ebuild:
+  2.1.10.34 version bump. The emerge --quiet-build option is now enabled by
+  default. Set --quiet-build=n in EMERGE_DEFAULT_OPTS if you want to disable it
+  by default. See the emerge(1) man page for more information about this option.
+  Bug #381649 tracks all bugs fixed since portage-2.1.10.11.
+
+  11 Nov 2011; Zac Medico <zmedico@gentoo.org> portage-9999.ebuild:
+  Remove obsolete less dependency (bug #384663) and tweak style of
+  preinst/postinst boolean conditions.
+
+  10 Nov 2011; Zac Medico <zmedico@gentoo.org> portage-2.1.6.13.ebuild,
+  portage-2.1.6.7.ebuild:
+  Reference bug #330937 for the python-2.6.6 blocker in old portage. This
+  blocker breaks the upgrade path from <python-2.6 since python-2.6.5 is no
+  longer in the tree.
+
+*portage-2.2.0_alpha73 (10 Nov 2011)
+
+  10 Nov 2011; Zac Medico <zmedico@gentoo.org> +portage-2.2.0_alpha73.ebuild:
+  2.2.0_alpha73 version bump. This includes all of the fixes in
+  portage-2.1.10.33. Bug #210077 tracks all bugs fixed since portage-2.1.x.
+
+*portage-2.1.10.33 (10 Nov 2011)
+
+  10 Nov 2011; Zac Medico <zmedico@gentoo.org> +portage-2.1.10.33.ebuild:
+  2.1.10.33 version bump. This fixes bug #389047 (docompress -x triggers lost
+  files when PORTAGE_COMPRESS is empty), bug #389609 (add emerge --moo action),
+  bug #389611 (emerge --changelog support for ChangeLog-YYYY), and bug #389617
+  (respect --usepkgonly in package spelling suggestions). Bug #381649 tracks all
+  bugs fixed since portage-2.1.10.11.
+
+  10 Nov 2011; Zac Medico <zmedico@gentoo.org> -portage-2.1.10.31.ebuild,
+  -portage-2.2.0_alpha71.ebuild:
+  Remove old versions.
+
+  02 Nov 2011; Zac Medico <zmedico@gentoo.org> portage-9999.ebuild:
+  Bump to EAPI 3 and add prefix support.
+
+*portage-2.2.0_alpha72 (30 Oct 2011)
+
+  30 Oct 2011; Zac Medico <zmedico@gentoo.org> +portage-2.2.0_alpha72.ebuild:
+  2.2.0_alpha72 version bump. This includes all of the fixes in
+  portage-2.1.10.32. Bug #210077 tracks all bugs fixed since portage-2.1.x.
+
+*portage-2.1.10.32 (30 Oct 2011)
+
+  30 Oct 2011; Zac Medico <zmedico@gentoo.org> +portage-2.1.10.32.ebuild:
+  2.1.10.32 version bump. This fixes bug #388031 (layout.conf profile-formats
+  setting), bug #388233 (emerge --check-news action), bug #388593 (run
+  pkg_pretend inside PORTAGE_TMPDIR), bug #388615 (optimize prelink-checksums
+  FEATURES setting), and bug #388773 (quickpkg unicode handling). This also
+  includes various fixes and improvements in metadata cache handling, including
+  layout.conf cache-formats support for md5-dict format which can now be
+  generated with egencache. Bug #381649 tracks all bugs fixed since
+  portage-2.1.10.11.
+
+  23 Oct 2011; Zac Medico <zmedico@gentoo.org> -portage-2.2.0_alpha67.ebuild,
+  -portage-2.1.10.27.ebuild, -portage-2.1.10.29.ebuild,
+  -portage-2.2.0_alpha69.ebuild, -portage-2.2.0_alpha70.ebuild,
+  -portage-2.1.10.30.ebuild:
+  Remove old versions.
+
+*portage-2.2.0_alpha71 (23 Oct 2011)
+
+  23 Oct 2011; Zac Medico <zmedico@gentoo.org> +portage-2.2.0_alpha71.ebuild:
+  2.2.0_alpha71 version bump. This includes all of the fixes in
+  portage-2.1.10.31. Bug #210077 tracks all bugs fixed since portage-2.1.x.
+
+*portage-2.1.10.31 (23 Oct 2011)
+
+  23 Oct 2011; Zac Medico <zmedico@gentoo.org> +portage-2.1.10.31.ebuild:
+  2.1.10.31 version bump. This fixes bug #388187 (InvalidAtom traceback
+  triggered by invalid atom in global updates after emerge --sync). Bug #381649
+  tracks all bugs fixed since portage-2.1.10.11.
+
+*portage-2.2.0_alpha70 (21 Oct 2011)
+
+  21 Oct 2011; Zac Medico <zmedico@gentoo.org> +portage-2.2.0_alpha70.ebuild:
+  2.2.0_alpha70 version bump. This includes all of the fixes in
+  portage-2.1.10.30. Bug #210077 tracks all bugs fixed since portage-2.1.x.
+
+*portage-2.1.10.30 (21 Oct 2011)
+
+  21 Oct 2011; Zac Medico <zmedico@gentoo.org> +portage-2.1.10.30.ebuild:
+  2.1.10.30 version bump. This adds support for repoman --echangelog=y to update
+  copyright dates in all changed files, and has support for a new
+  metadata/layout.conf "update-changelog" setting that enables repoman
+  --echangelog=y automatically (already enabled in the gentoo-x86). Bug #381649
+  tracks all bugs fixed since portage-2.1.10.11.
+
+  19 Oct 2011; Zac Medico <zmedico@gentoo.org> -portage-2.1.10.28.ebuild,
+  -portage-2.2.0_alpha68.ebuild:
+  Remove old versions.
+
+*portage-2.2.0_alpha69 (18 Oct 2011)
+
+  18 Oct 2011; Zac Medico <zmedico@gentoo.org> +portage-2.2.0_alpha69.ebuild:
+  2.2.0_alpha69 version bump. This includes all of the fixes in
+  portage-2.1.10.29. Bug #210077 tracks all bugs fixed since portage-2.1.x.
+
+*portage-2.1.10.29 (18 Oct 2011)
+
+  18 Oct 2011; Zac Medico <zmedico@gentoo.org> +portage-2.1.10.29.ebuild:
+  2.1.10.29 version bump. This fixes regressions in 2.1.10.28 and 2.2.0_alpha68
+  involving support for users who are not in the portage group. Bug #381649
+  tracks all bugs fixed since portage-2.1.10.11.
+
+*portage-2.2.0_alpha68 (16 Oct 2011)
+
+  16 Oct 2011; Zac Medico <zmedico@gentoo.org> +portage-2.2.0_alpha68.ebuild:
+  2.2.0_alpha68 version bump. This includes all of the fixes in
+  portage-2.1.10.28. Bug #210077 tracks all bugs fixed since portage-2.1.x.
+
+*portage-2.1.10.28 (16 Oct 2011)
+
+  16 Oct 2011; Zac Medico <zmedico@gentoo.org> +portage-2.1.10.28.ebuild:
+  2.1.10.28 version bump. This fixes bug #337853 (repoman --echangelog option,
+  enabled by default for the 'gentoo' repo as decided by gentoo's council), bug
+  #386871 (add note to RELEASE-NOTES indicating that FEATURES=fixpackages is
+  enabled unconditionally now, and can be temporarily avoided by setting
+  --package-moves=n in EMERGE_DEFAULT_OPTS), bug #387011 (document that emerge
+  --prune removes atoms from the world file), bug #387033 (quickpkg wildcard
+  atom support), and bug #387053 (new QA_SONAME_NO_SYMLINK variable). Bug
+  #381649 tracks all bugs fixed since portage-2.1.10.11.
+
+  14 Oct 2011; Zac Medico <zmedico@gentoo.org> -portage-2.1.10.24.ebuild,
+  -portage-2.1.10.25.ebuild, -portage-2.1.10.26.ebuild,
+  -portage-2.2.0_alpha64.ebuild, -portage-2.2.0_alpha65.ebuild,
+  -portage-2.2.0_alpha66.ebuild:
+  Remove old versions.
+
+*portage-2.2.0_alpha67 (12 Oct 2011)
+
+  12 Oct 2011; Zac Medico <zmedico@gentoo.org> +portage-2.2.0_alpha67.ebuild:
+  2.2.0_alpha67 version bump. This includes all of the fixes in
+  portage-2.1.10.27. Bug #210077 tracks all bugs fixed since portage-2.1.x.
+
+*portage-2.1.10.27 (12 Oct 2011)
+
+  12 Oct 2011; Zac Medico <zmedico@gentoo.org> +portage-2.1.10.27.ebuild:
+  2.1.10.27 version bump. This fixes bug #386771 (regression causing newlines
+  after every character in elog files), bug #386797 (fetch complains about
+  lack of space even if files are already fetched), bug #386829 (corrupt IUSE
+  in /var/db/pkg triggered by LANGS variable interacting with qt4-r2.eclass).
+  Bug #381649 tracks all bugs fixed since portage-2.1.10.11.
+
+*portage-2.2.0_alpha66 (10 Oct 2011)
+
+  10 Oct 2011; Zac Medico <zmedico@gentoo.org> +portage-2.2.0_alpha66.ebuild:
+  2.2.0_alpha66 version bump. This includes all of the fixes in
+  portage-2.1.10.26. Bug #210077 tracks all bugs fixed since portage-2.1.x.
+
+*portage-2.1.10.26 (10 Oct 2011)
+
+  10 Oct 2011; Zac Medico <zmedico@gentoo.org> +portage-2.1.10.26.ebuild:
+  2.1.10.26 version bump. This fixes bug #386627 (regression that causes
+  missing line breaks in elog files and mails), and also adds a new emerge
+  --dynamic-deps=<y|n> option which can be used to force emerge to use the
+  dependencies of installed packages (instead of substituting dependencies
+  from unbuilt ebuilds). Bug #381649 tracks all bugs fixed since
+  portage-2.1.10.11.
+
+*portage-2.2.0_alpha65 (10 Oct 2011)
+
+  10 Oct 2011; Zac Medico <zmedico@gentoo.org> +portage-2.2.0_alpha65.ebuild:
+  2.2.0_alpha65 version bump. This includes all of the fixes in
+  portage-2.1.10.25. Bug #210077 tracks all bugs fixed since portage-2.1.x.
+
+*portage-2.1.10.25 (10 Oct 2011)
+
+  10 Oct 2011; Zac Medico <zmedico@gentoo.org> +portage-2.1.10.25.ebuild:
+  2.1.10.25 version bump. This fixes bug #286201 (skip PORTAGE_TMPDIR write
+  check for fetchonly mode), bug #386379 (invalid warnings about ignored
+  binary packages), and bug #386569 (invalid warnings about Unmatched removal
+  atoms in package.mask). Bug #381649 tracks all bugs fixed since
+  portage-2.1.10.11.
+
+  10 Oct 2011; Zac Medico <zmedico@gentoo.org> -portage-2.1.10.20.ebuild,
+  -portage-2.1.10.22.ebuild, -portage-2.2.0_alpha60.ebuild,
+  -portage-2.2.0_alpha62.ebuild:
+  Remove old versions.
+
+*portage-2.2.0_alpha64 (08 Oct 2011)
+
+  08 Oct 2011; Zac Medico <zmedico@gentoo.org> -portage-2.2.0_alpha63.ebuild,
+  +portage-2.2.0_alpha64.ebuild:
+  2.2.0_alpha64 version bump. This includes all of the fixes in
+  portage-2.1.10.24. Bug #210077 tracks all bugs fixed since portage-2.1.x.
+
+*portage-2.1.10.24 (08 Oct 2011)
+
+  08 Oct 2011; Zac Medico <zmedico@gentoo.org> -portage-2.1.10.23.ebuild,
+  +portage-2.1.10.24.ebuild:
+  2.1.10.24 version bump. This fixes bug #386095 (set UTF-8 encoding in elog
+  mails with python2), and also has a repoman fix related to bug #385333
+  (overlays should us negative package.mask atoms instead of package.unmask).
+  Bug #381649 tracks all bugs fixed since portage-2.1.10.11.
+
+*portage-2.2.0_alpha63 (07 Oct 2011)
+
+  07 Oct 2011; Zac Medico <zmedico@gentoo.org> +portage-2.2.0_alpha63.ebuild:
+  2.2.0_alpha63 version bump. This includes all of the fixes in
+  portage-2.1.10.23. Bug #210077 tracks all bugs fixed since portage-2.1.x.
+
+*portage-2.1.10.23 (07 Oct 2011)
+
+  07 Oct 2011; Zac Medico <zmedico@gentoo.org> +portage-2.1.10.23.ebuild:
+  2.1.10.23 version bump. This fixes bug #340475 (repoman unnecessarily
+  commits signed manifests separately), and also has repoman commit logic
+  tweak for thin-manifests. Bug #381649 tracks all bugs fixed since
+  portage-2.1.10.11.
+
+*portage-2.2.0_alpha62 (06 Oct 2011)
+
+  06 Oct 2011; Zac Medico <zmedico@gentoo.org> -portage-2.2.0_alpha61.ebuild,
+  +portage-2.2.0_alpha62.ebuild:
+  2.2.0_alpha62 version bump. This includes all of the fixes in
+  portage-2.1.10.22. Bug #210077 tracks all bugs fixed since portage-2.1.x.
+
+*portage-2.1.10.22 (06 Oct 2011)
+
+  06 Oct 2011; Zac Medico <zmedico@gentoo.org> -portage-2.1.10.21.ebuild,
+  +portage-2.1.10.22.ebuild:
+  2.1.10.22 version bump. This fixes a regression in 2.1.10.21 and
+  2.2.0_alpha61 which produced extra empty lines in elog messages.
+  Bug #381649 tracks all bugs fixed since portage-2.1.10.11.
+
+  05 Oct 2011; Zac Medico <zmedico@gentoo.org> -portage-2.1.10.3.ebuild,
+  -portage-2.1.10.19.ebuild, -portage-2.2.0_alpha59.ebuild:
+  Remove old versions.
+
+*portage-2.2.0_alpha61 (05 Oct 2011)
+
+  05 Oct 2011; Zac Medico <zmedico@gentoo.org> +portage-2.2.0_alpha61.ebuild:
+  2.2.0_alpha61 version bump. This includes all of the fixes in
+  portage-2.1.10.21. Bug #210077 tracks all bugs fixed since portage-2.1.x.
+
+*portage-2.1.10.21 (05 Oct 2011)
+
+  05 Oct 2011; Zac Medico <zmedico@gentoo.org> +portage-2.1.10.21.ebuild:
+  2.1.10.21 version bump. This fixes bug #375265 (display relevant parent
+  in autounmask comments), bug #375613 (fix dispatch-conf replace-wscomments
+  pattern), bug #385133 (repos.conf trust-authoritative-cache settings),
+  bug #385341 (ValueError triggered by elog messages from gccxml),
+  bug #385391 (prefer slot conflict display over blocker display), and
+  bug #385413 (fix emerge --changelog to avoid unnecessary newline output
+  when there is nothing to display). Bug #381649 tracks all bugs fixed since
+  portage-2.1.10.11.
+
+  03 Oct 2011; Joseph Jezak <josejx@gentoo.org> portage-2.1.10.11.ebuild:
+  Marked ppc/ppc64 stable for bug #380677.
+
+*portage-2.2.0_alpha60 (29 Sep 2011)
+
+  29 Sep 2011; Zac Medico <zmedico@gentoo.org> +portage-2.2.0_alpha60.ebuild:
+  2.2.0_alpha60 version bump. This includes all of the fixes in
+  portage-2.1.10.20. Bug #210077 tracks all bugs fixed since portage-2.1.x.
+
+*portage-2.1.10.20 (29 Sep 2011)
+
+  29 Sep 2011; Zac Medico <zmedico@gentoo.org> +portage-2.1.10.20.ebuild:
+  2.1.10.20 version bump. This fixes bug #297549 (enable --binpkg-respect-use
+  automatically, unless --usepkgonly is enabled), bug #372485 (new emerge
+  --autounmask-keep-masks option), bug #375573 (handle cases where
+  backtracking masks become irrelevant due to the parent package getting
+  masked by backtracking), bug #379333 (new emerge
+  --autounmask-unrestricted-atoms option), bug #383859 (remove stray print
+  statement in fetch checksum failure code), bug #384003 (new emerge
+  --complete-graph-if-new-ver option), bug #384063 (fix portageq
+  best-visible for multi-repo support), bug #384177 (trigger repoman error
+  for obsolete no-herd value), bug #384597 (handle \r in installed
+  file names), bug #384663 (PAGER variable support in etc-update and
+  dispatch-conf), bug #384665 (archive-conf ImportError), and bug #384749
+  (UnicodeDecodeError triggered by invalid dependency string in depgraph).
+  Bug #381649 tracks all bugs fixed since portage-2.1.10.11.
+
+  29 Sep 2011; Zac Medico <zmedico@gentoo.org> -portage-2.1.10.18.ebuild,
+  -portage-2.2.0_alpha58.ebuild:
+  Remove old versions.
+
+*portage-2.2.0_alpha59 (19 Sep 2011)
+
+  19 Sep 2011; Zac Medico <zmedico@gentoo.org> +portage-2.2.0_alpha59.ebuild:
+  2.2.0_alpha59 version bump. This includes all of the fixes in
+  portage-2.1.10.19. Bug #210077 tracks all bugs fixed since portage-2.1.x.
+
+*portage-2.1.10.19 (19 Sep 2011)
+
+  19 Sep 2011; Zac Medico <zmedico@gentoo.org> +portage-2.1.10.19.ebuild:
+  2.1.10.19 version bump. This fixes bug #374233 (change "poor programming
+  practices" QA message to say "severe warnings" instead),  bug #375265
+  (show relevant parent in autounmask dependency chain), bug #383269
+  (fix quote handling for PORTDIR_OVERLAY), and bug #383375 (fix
+  emerge-webrsync to bail out if gpg is missing). Bug #381649 tracks all
+  bugs fixed since portage-2.1.10.11.
+
+  19 Sep 2011; Zac Medico <zmedico@gentoo.org> -portage-2.1.10.15.ebuild,
+  -portage-2.1.10.17.ebuild, -portage-2.2.0_alpha55.ebuild,
+  -portage-2.2.0_alpha57.ebuild:
+  Remove old versions.
+
+*portage-2.2.0_alpha58 (15 Sep 2011)
+
+  15 Sep 2011; Zac Medico <zmedico@gentoo.org> +portage-2.2.0_alpha58.ebuild:
+  2.2.0_alpha58 version bump. This includes all of the fixes in
+  portage-2.1.10.18. Bug #210077 tracks all bugs fixed since portage-2.1.x.
+
+*portage-2.1.10.18 (15 Sep 2011)
+
+  15 Sep 2011; Zac Medico <zmedico@gentoo.org> +portage-2.1.10.18.ebuild:
+  2.1.10.18 version bump. This fixes bug #382823 (depclean multislot
+  handling) and also has various fixes involving thin manifest support
+  (bug #333691). Bug #381649 tracks all bugs fixed since portage-2.1.10.11.
+
+*portage-2.2.0_alpha57 (14 Sep 2011)
+
+  14 Sep 2011; Zac Medico <zmedico@gentoo.org> +portage-2.2.0_alpha57.ebuild,
+  -portage-2.2.0_alpha56.ebuild:
+  2.2.0_alpha57 version bump. This includes all of the fixes in
+  portage-2.1.10.17. Bug #210077 tracks all bugs fixed since portage-2.1.x.
+
+*portage-2.1.10.17 (14 Sep 2011)
+
+  14 Sep 2011; Zac Medico <zmedico@gentoo.org> +portage-2.1.10.17.ebuild,
+  -portage-2.1.10.16.ebuild:
+  2.1.10.17 version bump. This fixes a repoman regression in 2.1.10.16 and
+  2.2.0_alpha56 which triggers a KeyError if the repo is referenced via a
+  symlink. Bug #381649 tracks all bugs fixed since portage-2.1.10.11.
+
+*portage-2.2.0_alpha56 (14 Sep 2011)
+
+  14 Sep 2011; Zac Medico <zmedico@gentoo.org> +portage-2.2.0_alpha56.ebuild:
+  2.2.0_alpha56 version bump. This includes all of the fixes in
+  portage-2.1.10.16. Bug #210077 tracks all bugs fixed since portage-2.1.x.
+
+*portage-2.1.10.16 (14 Sep 2011)
+
+  14 Sep 2011; Zac Medico <zmedico@gentoo.org> +portage-2.1.10.16.ebuild:
+  2.1.10.16 version bump. This fixes bug #382557 (regression in 2.1.10.15
+  and 2.2.0_alpha56 which triggered unwanted attempts to pull in new masked
+  virtual slots) and bug #333691 (thin manifest support). Bug #381649 tracks
+  all bugs fixed since portage-2.1.10.11.
+
+  14 Sep 2011; Zac Medico <zmedico@gentoo.org> -portage-2.1.10.14.ebuild,
+  -portage-2.2.0_alpha54.ebuild:
+  Remove old versions.
+
+*portage-2.2.0_alpha55 (09 Sep 2011)
+
+  09 Sep 2011; Zac Medico <zmedico@gentoo.org> +portage-2.2.0_alpha55.ebuild:
+  2.2.0_alpha55 version bump. This includes all of the fixes in
+  portage-2.1.10.15. Bug #210077 tracks all bugs fixed since portage-2.1.x.
+
+*portage-2.1.10.15 (09 Sep 2011)
+
+  09 Sep 2011; Zac Medico <zmedico@gentoo.org> +portage-2.1.10.15.ebuild:
+  2.1.10.15 version bump. This fixes bug #382199 (use constant utf8 file
+  system encoding for all locales) and bug #382233 (fix code for old
+  binhost protocol to work with python3). Bug #381649 tracks all bugs fixed
+  since portage-2.1.10.11.
+
+  09 Sep 2011; Zac Medico <zmedico@gentoo.org> -portage-2.1.10.13.ebuild,
+  -portage-2.2.0_alpha53.ebuild:
+  Remove old versions.
+
+*portage-2.2.0_alpha54 (06 Sep 2011)
+
+  06 Sep 2011; Zac Medico <zmedico@gentoo.org> +portage-2.2.0_alpha54.ebuild:
+  2.2.0_alpha54 version bump. This includes all of the fixes in
+  portage-2.1.10.14. Bug #210077 tracks all bugs fixed since portage-2.1.x.
+
+*portage-2.1.10.14 (06 Sep 2011)
+
+  06 Sep 2011; Zac Medico <zmedico@gentoo.org> +portage-2.1.10.14.ebuild:
+  2.1.10.14 version bump. This fixes bug #382021 (OSError or
+  UnicodeEncodeError triggered by symlink content, related to bug #381629).
+  Bug #381649 tracks all bugs fixed since portage-2.1.10.11.
+
+  06 Sep 2011; Zac Medico <zmedico@gentoo.org> -portage-2.1.10.12.ebuild,
+  -portage-2.2.0_alpha52.ebuild:
+  Remove old versions.
+
+*portage-2.2.0_alpha53 (04 Sep 2011)
+
+  04 Sep 2011; Zac Medico <zmedico@gentoo.org> +portage-2.2.0_alpha53.ebuild:
+  2.2.0_alpha53 version bump. This includes all of the fixes in
+  portage-2.1.10.13. Bug #210077 tracks all bugs fixed since portage-2.1.x.
+
+*portage-2.1.10.13 (04 Sep 2011)
+
+  04 Sep 2011; Zac Medico <zmedico@gentoo.org> +portage-2.1.10.13.ebuild:
+  2.1.10.13 version bump. This fixes bug #381087 (fix repoman
+  dependency.unknown check to detect more cases), bug #381629
+  (UnicodeEncodeError triggered by symlink content), bug #381657
+  (regression in 2.1.10.12 and 2.2.0_alpha53 that triggers AssertionError
+  with Python 3.1), and bug #381705 (handle AttributeError when loading
+  pickle from disk). Bug #381649 tracks all bugs fixed since
+  portage-2.1.10.11.
+
+*portage-2.2.0_alpha52 (03 Sep 2011)
+
+  03 Sep 2011; Zac Medico <zmedico@gentoo.org> +portage-2.2.0_alpha52.ebuild:
+  2.2.0_alpha52 version bump. This includes all of the fixes in
+  portage-2.1.10.12. Bug #210077 tracks all bugs fixed since portage-2.1.x.
+
+*portage-2.1.10.12 (03 Sep 2011)
+
+  03 Sep 2011; Zac Medico <zmedico@gentoo.org> +portage-2.1.10.12.ebuild:
+  2.1.10.12 version bump. This fixes bug #318897 (FEATURES=buildpkg
+  package.env support), bug #353648 (egencache --portdir-overlay option),
+  bug #379899 (QA Notice if dosym target omits basename), bug #380565
+  (fix deprecated ElementTree usage), bug #380625 (fix die hooks for EAPI 4
+  helpers_die), bug #381087 (include blockers in repoman dependency.unknown
+  check), and bug #381509 (allow merge of UTF-8 file names with locales that
+  specify ASCII encoding). Bug #381649 tracks all bugs fixed since
+  portage-2.1.10.11.
+
+  27 Aug 2011; Jeroen Roovers <jer@gentoo.org> portage-2.1.10.11.ebuild:
+  Stable for HPPA (bug #380677).
+
+  27 Aug 2011; Zac Medico <zmedico@gentoo.org> portage-2.1.10.11.ebuild:
+  Initialize /var/log/portage permissions for bug #378451 and bug #377177.
+
+  27 Aug 2011; Raúl Porcel <armin76@gentoo.org> portage-2.1.10.11.ebuild:
+  alpha/arm/ia64/m68k/s390/sh/sparc/x86 stable wrt #380677
+
+  26 Aug 2011; Markos Chandras <hwoarang@gentoo.org> portage-2.1.10.11.ebuild:
+  Stable on amd64 wrt bug #380677
+
+  17 Aug 2011; Zac Medico <zmedico@gentoo.org> -portage-2.1.10.10.ebuild,
+  -portage-2.2.0_alpha50.ebuild:
+  Remove old versions.
+
+*portage-2.2.0_alpha51 (12 Aug 2011)
+
+  12 Aug 2011; Zac Medico <zmedico@gentoo.org> +portage-2.2.0_alpha51.ebuild:
+  2.2.0_alpha51 version bump. This includes all of the fixes in
+  portage-2.1.10.11. Bug #210077 tracks all bugs fixed since portage-2.1.x.
+
+*portage-2.1.10.11 (12 Aug 2011)
+
+  12 Aug 2011; Zac Medico <zmedico@gentoo.org> +portage-2.1.10.11.ebuild:
+  2.1.10.11 version bump. This fixes bug #323213 (clean up empty info dirs
+  for packages like binutils), bug #377907 (remove "masked by: profile"
+  support, which was legacy behavior according to PMS section 5.2.7), and
+  bug #378403 (bail out early if $PORTAGE_TMPDIR/portage is a symlink and
+  sandbox is enabled). This also includes a new repoman --if-modified option
+  which can be used to limit checks to packages with uncommitted
+  modifications, useful especially for category or repo-level commits.
+  Bug #373933 tracks all bugs fixed since portage-2.1.10.3.
+
+  08 Aug 2011; Zac Medico <zmedico@gentoo.org> -portage-2.1.10.9.ebuild,
+  -portage-2.2.0_alpha47.ebuild, -portage-2.2.0_alpha49.ebuild:
+  Remove old versions.
+
+*portage-2.2.0_alpha50 (02 Aug 2011)
+
+  02 Aug 2011; Zac Medico <zmedico@gentoo.org> +portage-2.2.0_alpha50.ebuild:
+  2.2.0_alpha50 version bump. This includes all of the fixes in
+  portage-2.1.10.10. Bug #210077 tracks all bugs fixed since portage-2.1.x.
+
+*portage-2.1.10.10 (02 Aug 2011)
+
+  02 Aug 2011; Zac Medico <zmedico@gentoo.org> +portage-2.1.10.10.ebuild:
+  2.1.10.10 version bump. This fixes bug #376741 (make unpack compatible with
+  PMS for rare cases), and fixes some more false alarm error message about
+  symlinks to directories. Bug #373933 tracks all bugs fixed since
+  portage-2.1.10.3.
+
+  02 Aug 2011; Zac Medico <zmedico@gentoo.org> -portage-2.1.10.7.ebuild,
+  -portage-2.2.0_alpha46.ebuild:
+  Remove old versions.
+
+*portage-2.2.0_alpha49 (29 Jul 2011)
+
+  29 Jul 2011; Zac Medico <zmedico@gentoo.org> -portage-2.2.0_alpha48.ebuild,
+  +portage-2.2.0_alpha49.ebuild:
+  2.2.0_alpha49 version bump. This fixes a false alarm error message about symlinks
+  to directories, produced by portage-2.2.0_alpha48.
+
+*portage-2.1.10.9 (29 Jul 2011)
+
+  29 Jul 2011; Zac Medico <zmedico@gentoo.org> -portage-2.1.10.8.ebuild,
+  +portage-2.1.10.9.ebuild:
+  2.1.10.9 version bump. This fixes a false alarm error message about symlinks
+  to directories, produced by portage-2.1.10.8.
+
+*portage-2.2.0_alpha48 (29 Jul 2011)
+
+  29 Jul 2011; Zac Medico <zmedico@gentoo.org> +portage-2.2.0_alpha48.ebuild:
+  2.2.0_alpha48 version bump. This includes all of the fixes in
+  portage-2.1.10.8. Bug #210077 tracks all bugs fixed since portage-2.1.x.
+
+*portage-2.1.10.8 (29 Jul 2011)
+
+  29 Jul 2011; Zac Medico <zmedico@gentoo.org> +portage-2.1.10.8.ebuild:
+  2.1.10.8 version bump. This fixes bug #326685 (handle collision between
+  directory and symlink), and bug #375835 (SELinux support for fetch from
+  binhost). Bug #373933 tracks all bugs fixed since portage-2.1.10.3.
+
+  26 Jul 2011; Zac Medico <zmedico@gentoo.org> portage-2.1.10.7.ebuild,
+  portage-2.2.0_alpha46.ebuild, portage-2.2.0_alpha47.ebuild,
+  portage-9999.ebuild:
+  Bug #374287 - Block <logrotate-3.8.0 in order to avoid warnings triggered by
+  the 'su' directive which is not supported by earlier versions.
+
+  26 Jul 2011; Zac Medico <zmedico@gentoo.org> -portage-2.1.10.6.ebuild,
+  -portage-2.2.0_alpha45.ebuild:
+  Remove old versions.
+
+*portage-2.2.0_alpha47 (24 Jul 2011)
+
+  24 Jul 2011; Zac Medico <zmedico@gentoo.org> +portage-2.2.0_alpha47.ebuild:
+  2.2.0_alpha47 version bump. This fixes bug #326685 (improved handling for
+  ebuilds that replace a directory with a symlink), bug #338959 (@installed
+  pulls in unwanted new slots), and bug #375835 (SELinux support for fetching
+  from binhost). This also includes memory and performance optimizations for
+  preserve-libs and @preserved-rebuild. Bug #210077 tracks all bugs fixed
+  since portage-2.1.x.
+
+*portage-2.2.0_alpha46 (19 Jul 2011)
+
+  19 Jul 2011; Zac Medico <zmedico@gentoo.org> +portage-2.2.0_alpha46.ebuild:
+  2.2.0_alpha46 version bump. This includes all of the fixes in
+  portage-2.1.10.7, and also fixes bug #289180 (preserve-libs preserves
+  redundant libraries if soname has multiple providers). Bug #210077 tracks
+  all bugs fixed since portage-2.1.x.
+
+*portage-2.1.10.7 (19 Jul 2011)
+
+  19 Jul 2011; Zac Medico <zmedico@gentoo.org> +portage-2.1.10.7.ebuild:
+  2.1.10.7 version bump. This fixes bug #375331 (only allow one fetch thread
+  at a time with parallel-fetch and --jobs=1) and bug #375571 (fix emerge
+  --noreplace bugs by making --noreplace identical to --selective).
+  Bug #373933 tracks all bugs fixed since portage-2.1.10.3.
+
+  19 Jul 2011; Zac Medico <zmedico@gentoo.org> -portage-2.1.9.50.ebuild,
+  -portage-2.1.10.4.ebuild, -portage-2.2.0_alpha41.ebuild,
+  -portage-2.2.0_alpha43.ebuild:
+  Remove old versions.
+
+  14 Jul 2011; Jeroen Roovers <jer@gentoo.org> portage-2.1.10.3.ebuild:
+  Stable for HPPA (bug #373523).
+
+*portage-2.2.0_alpha45 (14 Jul 2011)
+
+  14 Jul 2011; Zac Medico <zmedico@gentoo.org> +portage-2.2.0_alpha45.ebuild,
+  -portage-2.2.0_alpha44.ebuild:
+  2.2.0_alpha45 version bump. This includes all of the fixes in
+  portage-2.1.10.6. Bug #210077 tracks all bugs fixed since portage-2.1.x.
+
+*portage-2.1.10.6 (14 Jul 2011)
+
+  14 Jul 2011; Zac Medico <zmedico@gentoo.org> +portage-2.1.10.6.ebuild,
+  -portage-2.1.10.5.ebuild:
+  2.1.10.6 version bump. This fixes a regression in portage-2.1.10.6 which
+  caused 'Insufficient data for checksum verification' errors when using
+  ebuild(1) in some cases. Bug #373933 tracks all bugs fixed since
+  portage-2.1.10.3.
+
+*portage-2.2.0_alpha44 (13 Jul 2011)
+
+  13 Jul 2011; Zac Medico <zmedico@gentoo.org> +portage-2.2.0_alpha44.ebuild:
+  2.2.0_alpha44 version bump. This includes all of the fixes in
+  portage-2.1.10.5. Bug #210077 tracks all bugs fixed since portage-2.1.x.
+
+*portage-2.1.10.5 (13 Jul 2011)
+
+  13 Jul 2011; Zac Medico <zmedico@gentoo.org> +portage-2.1.10.5.ebuild:
+  2.1.10.5 version bump. This fixes bug #199722 (hasq and useq deprecation),
+  bug #374287 (fix logrotate config for logrotate-3.8.0 compatibility),
+  bug #374397 (near infinite loop triggered by circular deps in emerge dep
+  calculation), bug #374791 (fix 'has' to match PMS), bug #374583 (emerge
+  --keep-going regression since portage-2.1.10), and bug #374809 (show
+  maintainer info in log for pkg_pretend). Bug #373933 tracks all bugs fixed
+  since portage-2.1.10.3.
+
+  12 Jul 2011; Zac Medico <zmedico@gentoo.org> portage-9999.ebuild:
+  Require python:2.6[threads] since import of the io module in python-2.6
+  raises ImportError for the thread module if threading is disabled.
+
+  10 Jul 2011; Zac Medico <zmedico@gentoo.org> portage-9999.ebuild:
+  Install minimal tests for preinst sanity check.
+
+  09 Jul 2011; Kacper Kowalik <xarthisius@gentoo.org> portage-2.1.10.3.ebuild:
+  ppc64 stable wrt #373523
+
+  04 Jul 2011; nixnut <nixnut@gentoo.org> portage-2.1.10.3.ebuild:
+  ppc stable #373523
+
+*portage-2.1.10.4 (03 Jul 2011)
+
+  03 Jul 2011; Zac Medico <zmedico@gentoo.org> +portage-2.1.10.4.ebuild:
+  2.1.10.4 version bump. This fixes bug #355283 (fix distcc and ccache
+  features to use the default ABI dir), bug #365033 (make.conf parser behaves
+  like echo -e though it shouldn't), bug #370693 (extended repo-level config
+  file support), bug #371767 (emerge KeyError triggered by --exclude in some
+  cases), bug #371909 (unnecessary ccache messages triggered by pkg_info),
+  bug #371987 (make repoman handle EACCESS when generating Manifest),
+  bug #372033 (emerge suggests package that has no available ebuilds),
+  bug #372183 (make PORTAGE_COMPRESS_FLAGS handle -k correctly), bug #372193
+  (portageq all_best_visible IndexError), bug #372789 (make repoman trigger
+  dependency.unknown for unknown packages in || deps), bug #373301 (remove
+  FEATURES=severe docs since it's not implemented), and bug #373341 (always
+  use ldconfig -X, to avoid interference with FEATURES=preserve-libs when
+  downgrading libraries). Bug #373933 tracks all bugs fixed since
+  portage-2.1.10.3.
+
+  03 Jul 2011; Raúl Porcel <armin76@gentoo.org> portage-2.1.10.3.ebuild:
+  alpha/arm/ia64/m68k/s390/sh/sparc/x86 stable wrt #373523
+
+  02 Jul 2011; Markos Chandras <hwoarang@gentoo.org> portage-2.1.10.3.ebuild:
+  Stable on amd64 wrt bug #373523
+
+*portage-2.2.0_alpha43 (01 Jul 2011)
+
+  01 Jul 2011; Zac Medico <zmedico@gentoo.org> -portage-2.2.0_alpha42.ebuild,
+  +portage-2.2.0_alpha43.ebuild:
+  2.2.0_alpha43 version bump. This fixes bug #373703 (2.2.0_alpha42
+  regression in make.conf handling of escaped newlines).
+
+*portage-2.2.0_alpha42 (01 Jul 2011)
+
+  01 Jul 2011; Zac Medico <zmedico@gentoo.org> +portage-2.2.0_alpha42.ebuild:
+  2.2.0_alpha42 version bump. This fixes bug #355283 (fix distcc and ccache
+  features to use the default ABI dir), bug #365033 (make.conf parser behaves
+  like echo -e though it shouldn't), bug #370693 (extended repo-level config
+  file support), bug #371767 (emerge KeyError triggered by --exclude in some
+  cases), bug #371909 (unnecessary ccache messages triggered by pkg_info),
+  bug #371987 (make repoman handle EACCESS when generating Manifest),
+  bug #372183 (make PORTAGE_COMPRESS_FLAGS handle -k correctly), bug #372193
+  (portageq all_best_visible IndexError), bug #372789 (make repoman trigger
+  dependency.unknown for unknown packages in || deps), bug #373301 (remove
+  FEATURES=severe docs since it's not implemented), and bug #373341 (always
+  use ldconfig -X, to avoid interference with FEATURES=preserve-libs when
+  downgrading libraries). Bug #210077 tracks all bugs fixed since
+  portage-2.1.x.
+
+  28 Jun 2011; Zac Medico <zmedico@gentoo.org> portage-2.1.10.3.ebuild,
+  portage-2.2.0_alpha41.ebuild, portage-9999.ebuild:
+  Don't install tests since many of them rely upon having the complete source
+  tree.
+
+  21 Jun 2011; Zac Medico <zmedico@gentoo.org> -portage-2.1.10.ebuild,
+  -portage-2.2.0_alpha38.ebuild:
+  Remove old versions.
+
+  14 Jun 2011; Zac Medico <zmedico@gentoo.org> -portage-2.1.10.2.ebuild,
+  -portage-2.2.0_alpha40.ebuild:
+  Remove old versions.
+
+*portage-2.2.0_alpha41 (14 Jun 2011)
+
+  14 Jun 2011; Zac Medico <zmedico@gentoo.org> +portage-2.2.0_alpha41.ebuild:
+  2.2.0_alpha41 version bump. This includes all of the fixes in
+  portage-2.1.10.3. Bug #210077 tracks all bugs fixed since portage-2.1.x.
+
+*portage-2.1.10.3 (14 Jun 2011)
+
+  14 Jun 2011; Zac Medico <zmedico@gentoo.org> +portage-2.1.10.3.ebuild:
+  2.1.10.3 version bump.This fixes bug #371423 (InvalidDependString triggered
+  by changes in IUSE for installed packages). Bug #358927 tracks all bugs
+  fixed since portage-2.1.9.42.
+
+  12 Jun 2011; Zac Medico <zmedico@gentoo.org> -portage-2.1.10.1.ebuild,
+  -portage-2.2.0_alpha37.ebuild, -portage-2.2.0_alpha39.ebuild:
+  Remove old versions.
+
+*portage-2.2.0_alpha40 (11 Jun 2011)
+
+  11 Jun 2011; Zac Medico <zmedico@gentoo.org> +portage-2.2.0_alpha40.ebuild:
+  2.2.0_alpha40 version bump. This includes all of the fixes in
+  portage-2.1.10.2. Bug #210077 tracks all bugs fixed since portage-2.1.x.
+
+*portage-2.1.10.2 (11 Jun 2011)
+
+  11 Jun 2011; Zac Medico <zmedico@gentoo.org> +portage-2.1.10.2.ebuild:
+  2.1.10.2 version bump. This fixes breakage in the fakedbapi class which may
+  be used by some API consumers. It also fixes poor merge order in some cases
+  involving circular dependencies. Bug #358927 tracks all bugs fixed since
+  portage-2.1.9.42.
+
+*portage-2.2.0_alpha39 (10 Jun 2011)
+
+  10 Jun 2011; Zac Medico <zmedico@gentoo.org> +portage-2.2.0_alpha39.ebuild:
+  2.2.0_alpha39 version bump. This includes all of the fixes in
+  portage-2.1.10.1. Bug #210077 tracks all bugs fixed since portage-2.1.x.
+
+*portage-2.1.10.1 (10 Jun 2011)
+
+  10 Jun 2011; Zac Medico <zmedico@gentoo.org> +portage-2.1.10.1.ebuild:
+  2.1.10.1 version bump. This fixes bug #355283 (fix distcc and ccache
+  features to use the default ABI dir), bug #368817 (don't show 'unexpected
+  exit' message when killed by signal), bug #370465 (EAPI mask messages
+  handled incorrectly sometimes), bug #370477 (keywords mask messages handled
+  incorrectly sometimes), and bug #370565 (treat DEPEND strings containing
+  empty parenthesis as invalid). Bug #358927 tracks all bugs fixed since
+  portage-2.1.9.42.
+
+  07 Jun 2011; Zac Medico <zmedico@gentoo.org> portage-2.1.6.7.ebuild,
+  portage-2.1.6.13.ebuild, portage-2.1.9.42.ebuild, portage-2.1.9.50.ebuild,
+  portage-2.1.10.ebuild, portage-2.2.0_alpha37.ebuild,
+  portage-2.2.0_alpha38.ebuild, portage-9999.ebuild, metadata.xml:
+  Bug #370295 - Pull in less as pager for etc-update, so --depclean doesn't
+  remove it due to virtual/pager being satisfied by more from util-linux.
+
+*portage-2.2.0_alpha38 (06 Jun 2011)
+
+  06 Jun 2011; Zac Medico <zmedico@gentoo.org> +portage-2.2.0_alpha38.ebuild:
+  2.2.0_alpha38 version bump. This includes all of the fixes in
+  portage-2.1.10. Bug #210077 tracks all bugs fixed since portage-2.1.x.
+
+*portage-2.1.10 (06 Jun 2011)
+
+  06 Jun 2011; Zac Medico <zmedico@gentoo.org> +portage-2.1.10.ebuild:
+  2.1.10 version bump. This fixes bug #142508 (clear_term config option
+  for etc-update), bug #157357 (new portageq expand_virtual command for
+  new-style GLEP 37 virtuals), bug #185377 (support for atom::repo in
+  commands and config files), bug #262038 (handle identically versioned
+  ebuilds from different overlays with different masking status), and bug
+  #345775 (--autounmask-write option), bug #368865 (repoman EAPI.incompatible
+  check for EMERGE_FROM in EAPI 4), bug #369913 (old-style binhost fails with
+  python-2.7), and bug #369985 (include package.mask comments in --autounmask
+  output). The emerge --autounmask option is now enabled by default. The
+  --autounmask-write option can be used to have config changes automatically
+  written to the appropriate files (repecting --ask and CONFIG_PROTECT). If
+  --autounmask behavior is not desired as the default behavior, then it can
+  be disabled by adding --autounmask=n to the EMERGE_DEFAULT_OPTS variable
+  in make.conf. Refer to the emerge(1) man page for more information. Also,
+  see the NEWS file for other new features included in portage-2.1.10.
+  Bug #358927 tracks all bugs fixed since portage-2.1.9.42.
+
+  06 Jun 2011; Zac Medico <zmedico@gentoo.org> -portage-2.1.9.49.ebuild,
+  -portage-2.2.0_alpha33.ebuild:
+  Remove old versions.
+
+  27 May 2011; Zac Medico <zmedico@gentoo.org> -portage-2.2.0_alpha34.ebuild,
+  -portage-2.2.0_alpha35.ebuild, -portage-2.2.0_alpha36.ebuild:
+  Remove old versions.
+
+*portage-2.2.0_alpha37 (27 May 2011)
+
+  27 May 2011; Zac Medico <zmedico@gentoo.org> +portage-2.2.0_alpha37.ebuild:
+  2.2.0_alpha37 version bump. This includes all of the fixes in
+  portage-2.1.9.50 and also fixes bug #368725 (outdated deps of installed
+  packages use for calculations in some cases). Bug #210077 tracks all bugs
+  fixed since portage-2.1.x.
+
+*portage-2.1.9.50 (27 May 2011)
+
+  27 May 2011; Zac Medico <zmedico@gentoo.org> +portage-2.1.9.50.ebuild:
+  2.1.9.50 version bump. This fixes bug #142508 (make etc-update clear
+  term when appropriate), bug #288597 (FEATURES=distcc-pump), and also fixes
+  some cases related to bug #364681 (recognize new-style virtual/libc).
+  Bug #358927 tracks all bugs fixed since portage-2.1.9.42.
+
+*portage-2.2.0_alpha36 (25 May 2011)
+
+  25 May 2011; Zac Medico <zmedico@gentoo.org> +portage-2.2.0_alpha36.ebuild:
+  2.2.0_alpha36 version bump. This fixes bug #368429 (invalid USE change
+  suggestions triggered when emerge --autounmask fails). Bug #210077 tracks
+  all bugs fixed since portage-2.1.x.
+
+*portage-2.2.0_alpha35 (23 May 2011)
+
+  23 May 2011; Zac Medico <zmedico@gentoo.org> +portage-2.2.0_alpha35.ebuild:
+  2.2.0_alpha35 version bump. This fixes bug #288597 (FEATURES=distcc-pump).
+  It also includes some subtle merge order optimizations and fixes a possible
+  KeyError in the preserve-libs code from bug #286714. Bug #210077 tracks all
+  bugs fixed since portage-2.1.x.
+
+*portage-2.2.0_alpha34 (18 May 2011)
+
+  18 May 2011; Zac Medico <zmedico@gentoo.org> +portage-2.2.0_alpha34.ebuild:
+  2.2.0_alpha34 version bump. This fixes bug #142508 (make etc-update clear
+  term when appropriate), bug #286714 (preserve-libs support for packages
+  uninstalled and not replaced), and bug #345775 (--autounmask-write option
+  for editing config files). Also, emerge --autounmask now handles packages
+  that are masked by missing keywords or package.mask. Since all of the
+  feautures of app-portage/autounmask are implemented, emerge --autounmask
+  is now enabled by default. Set EMERGE_DEFAULT_OPTS="--autounmask=n" in
+  make.conf if you'd like to disable it. Bug #210077 tracks all bugs fixed
+  since portage-2.1.x.
+
+  18 May 2011; Zac Medico <zmedico@gentoo.org> -portage-2.1.9.48.ebuild,
+  -portage-2.2.0_alpha30.ebuild, -portage-2.2.0_alpha32.ebuild:
+  Remove old versions.
+
+*portage-2.2.0_alpha33 (12 May 2011)
+
+  12 May 2011; Zac Medico <zmedico@gentoo.org> +portage-2.2.0_alpha33.ebuild:
+  2.2.0_alpha33 version bump. This includes all of the fixes in
+  portage-2.1.9.49. Bug #210077 tracks all bugs fixed since portage-2.1.x.
+
+*portage-2.1.9.49 (12 May 2011)
+
+  12 May 2011; Zac Medico <zmedico@gentoo.org> +portage-2.1.9.49.ebuild:
+  2.1.9.49 version bump. This fixes bug #366939 (extract binpkg
+  environment.bz2 for pkg_pretend). Bug #358927 tracks all bugs fixed
+  since portage-2.1.9.42.
+
+  11 May 2011; Zac Medico <zmedico@gentoo.org> -portage-2.1.9.46.ebuild,
+  -portage-2.1.9.47.ebuild, -portage-2.2.0_alpha31.ebuild:
+  Remove old versions.
+
+*portage-2.2.0_alpha32 (08 May 2011)
+
+  08 May 2011; Zac Medico <zmedico@gentoo.org> +portage-2.2.0_alpha32.ebuild:
+  2.2.0_alpha32 version bump. This fixes bug #366061 (preserved-libs not
+  garbage collected when appropriate), and includes all of the fixes in
+  portage-2.1.9.48. This also includes support for FEATURES=parallel-install,
+  which can greatly improve performance when installing large numbers of
+  binary packages. Bug #210077 tracks all bugs fixed since portage-2.1.x.
+
+*portage-2.1.9.48 (08 May 2011)
+
+  08 May 2011; Zac Medico <zmedico@gentoo.org> +portage-2.1.9.48.ebuild:
+  2.1.9.48 version bump. This fixes a regression in 2.1.9.47 which causes
+  "AttributeError: 'vardbapi' object has no attribute 'match_pkgs'" errors
+  with emerge --resume and --keep-going. Bug #358927 tracks all bugs fixed
+  since portage-2.1.9.42.
+
+  06 May 2011; Zac Medico <zmedico@gentoo.org> portage-9999.ebuild:
+  Migrate to git-2.eclass.
+
+*portage-2.2.0_alpha31 (05 May 2011)
+
+  05 May 2011; Zac Medico <zmedico@gentoo.org> +portage-2.2.0_alpha31.ebuild:
+  2.2.0_alpha31 version bump. This includes all of the fixes in
+  portage-2.1.9.46. Bug #210077 tracks all bugs fixed since portage-2.1.x.
+
+*portage-2.1.9.47 (05 May 2011)
+
+  05 May 2011; Zac Medico <zmedico@gentoo.org> +portage-2.1.9.47.ebuild:
+  2.1.9.47 version bump. This fixes bug #363137 (add --misspell-suggesions
+  option), bug #364035 (breakage in ebuild(1) FEATURES override), bug #364467
+  (handle gcc-4.6 warnings), bug #364673 (support new-style virtuals in
+  emerge --info), bug #364681 (recognize new-style virtual/libc, bug #364701
+  (make --autounmask recognize use.mask/force), bug #365319 (allow emerge.log
+  permissions adjustment), bug #365439 (add helpers for variable settings in
+  bashrc), and bug #365505 (make repoman warn about old-style virtual PROVIDE
+  settings for GLEP 37). Bug #358927 tracks all bugs fixed since 2.1.9.42.
+
+  05 May 2011; Zac Medico <zmedico@gentoo.org> -portage-2.1.8.3.ebuild,
+  -portage-2.1.9.25.ebuild:
+  Remove old versions.
+
+  05 May 2011; Zac Medico <zmedico@gentoo.org> ChangeLog:
+  Prune old ChangeLog entries.
+
+  21 Apr 2011; Zac Medico <zmedico@gentoo.org> -portage-2.1.9.45.ebuild,
+  -portage-2.2.0_alpha28.ebuild, -portage-2.2.0_alpha29.ebuild:
+  Remove old versions.
+
+*portage-2.2.0_alpha30 (14 Apr 2011)
+
+  14 Apr 2011; Zac Medico <zmedico@gentoo.org> +portage-2.2.0_alpha30.ebuild:
+  2.2.0_alpha30 version bump. This includes all of the fixes in
+  portage-2.1.9.46. Bug #210077 tracks all bugs fixed since portage-2.1.x.
+
+*portage-2.1.9.46 (14 Apr 2011)
+
+  14 Apr 2011; Zac Medico <zmedico@gentoo.org> +portage-2.1.9.46.ebuild:
+  2.1.9.46 version bump. This fixes bug #361257 (fix "GNU info directory"
+  message for --quiet), bug #361463 (fix fetch restriction display for
+  PORTAGE_RO_DISTDIRS), and bug #363073 (InvalidDependString triggered
+  in extract_affecting_use by EAPI 4 USE dep defaults). Bug #358927
+  tracks all bugs fixed since 2.1.9.42.
+
+  09 Apr 2011; Zac Medico <zmedico@gentoo.org> portage-2.1.6.7.ebuild,
+  portage-2.1.6.13.ebuild, portage-2.1.8.3.ebuild, portage-2.1.9.25.ebuild,
+  portage-2.1.9.42.ebuild, portage-2.1.9.45.ebuild,
+  portage-2.2.0_alpha28.ebuild, portage-2.2.0_alpha29.ebuild,
+  portage-9999.ebuild:
+  Bug #358847 - Remove virtual/portage PROVIDE since it's been replaced by
+  the virtual/package-manager new-style virtual ebuild (GLEP 37).
+
+  05 Apr 2011; Zac Medico <zmedico@gentoo.org> -portage-2.1.9.43.ebuild,
+  -portage-2.1.9.44.ebuild, -portage-2.2.0_alpha26.ebuild,
+  -portage-2.2.0_alpha27.ebuild:
+  Remove old versions.
+
+*portage-2.2.0_alpha29 (27 Mar 2011)
+
+  27 Mar 2011; Zac Medico <zmedico@gentoo.org> +portage-2.2.0_alpha29.ebuild:
+  2.2.0_alpha29 version bump. This includes all of the fixes in
+  portage-2.1.9.45. Bug #210077 tracks all bugs fixed since portage-2.1.x.
+
+*portage-2.1.9.45 (27 Mar 2011)
+
+  27 Mar 2011; Zac Medico <zmedico@gentoo.org> +portage-2.1.9.45.ebuild:
+  2.1.9.45 version bump. This fixes bug #359675 (UnicodeEncodeError triggered
+  by UnsupportedAPIException during unmerge), bug #359681 (fix whitespace in
+  CONFIGURATION FILES update message), and bug #360233 (support --ask=n).
+  Bug #358927 tracks all bugs fixed since 2.1.9.42.
+
+  21 Mar 2011; Zac Medico <zmedico@gentoo.org> portage-2.1.6.7.ebuild,
+  portage-2.1.6.13.ebuild, portage-2.1.8.3.ebuild, portage-2.1.9.25.ebuild,
+  portage-2.1.9.42.ebuild, portage-2.1.9.43.ebuild, portage-2.1.9.44.ebuild,
+  portage-2.2.0_alpha26.ebuild, portage-2.2.0_alpha27.ebuild,
+  portage-2.2.0_alpha28.ebuild, portage-9999.ebuild:
+  Bug #359731 - Die early if get_libdir fails.
+
+*portage-2.2.0_alpha28 (18 Mar 2011)
+
+  18 Mar 2011; Zac Medico <zmedico@gentoo.org> +portage-2.2.0_alpha28.ebuild:
+  2.2.0_alpha28 version bump. This includes all of the fixes in
+  portage-2.1.9.44. Bug #210077 tracks all bugs fixed since portage-2.1.x.
+
+*portage-2.1.9.44 (18 Mar 2011)
+
+  18 Mar 2011; Zac Medico <zmedico@gentoo.org> +portage-2.1.9.44.ebuild:
+  2.1.9.44 version bump. This fixes bug #359273 (make.conf.5 spelling
+  correction for "direcory"). It also includes various fixes for emerge
+  Ctrl-C/SIGINT/SIGTERM handling, for some cases in which it would hang
+  or crash instead of exiting properly. Bug #358927 tracks all bugs
+  fixed since 2.1.9.42.
+
+  17 Mar 2011; Raúl Porcel <armin76@gentoo.org> portage-2.1.9.42.ebuild:
+  alpha/ia64/m68k/s390/sh/x86 stable wrt #358009
+
+  14 Mar 2011; Michael Weber <xmw@gentoo.org> portage-2.1.9.42.ebuild:
+  arm/sparc stable (bug 358009)
+
+*portage-2.2.0_alpha27 (14 Mar 2011)
+
+  14 Mar 2011; Zac Medico <zmedico@gentoo.org> +portage-2.2.0_alpha27.ebuild:
+  2.2.0_alpha27 version bump. This includes all of the fixes in
+  portage-2.1.9.43. Bug #210077 tracks all bugs fixed since portage-2.1.x.
+
+*portage-2.1.9.43 (14 Mar 2011)
+
+  14 Mar 2011; Zac Medico <zmedico@gentoo.org> +portage-2.1.9.43.ebuild:
+  2.1.9.43 version bump. This fixes bug #346899 (allow noexec /var/tmp mount
+  with default config), bug #357009 (disallow uninstall of default python
+  interpreter), bug #357093 (don't output \b to non-tty), bug #357297 (fix
+  whitespace handling for PORTDIR_OVERLAY), and bug #357581 (fix confusing
+  message aux_get error when eclass directory is missing). Bug #358927 tracks
+  all bugs fixed since 2.1.9.42.
+
+  11 Mar 2011; Jeroen Roovers <jer@gentoo.org> portage-2.1.9.42.ebuild:
+  Stable for HPPA (bug #358009).
+
+  09 Mar 2011; Kacper Kowalik <xarthisius@gentoo.org> portage-2.1.9.42.ebuild:
+  ppc/ppc64 stable wrt #358009
+
+  09 Mar 2011; Markos Chandras <hwoarang@gentoo.org> portage-2.1.9.42.ebuild:
+  Stable on amd64 wrt bug #358009
+
+  05 Mar 2011; Zac Medico <zmedico@gentoo.org> -portage-2.1.9.41.ebuild,
+  -portage-2.2.0_alpha25.ebuild:
+  Remove old versions.
+
+*portage-2.2.0_alpha26 (02 Mar 2011)
+
+  02 Mar 2011; Zac Medico <zmedico@gentoo.org> +portage-2.2.0_alpha26.ebuild:
+  2.2.0_alpha26 version bump. This includes all of the fixes in
+  portage-2.1.9.42. Bug #210077 tracks all bugs fixed since portage-2.1.x.
+
+*portage-2.1.9.42 (02 Mar 2011)
+
+  02 Mar 2011; Zac Medico <zmedico@gentoo.org> +portage-2.1.9.42.ebuild:
+  2.1.9.42 version bump. This fixes bug #262365 (repoman portage.internal
+  warning for ecompress, ecompressdir, prepall, prepalldocs, and preplib),
+  bug #356375 (fix emerge --sync to handle properly handle hardcoded IPv6
+  address in SYNC), bug #356461 (dodoc -r collapses directory structure),
+  and bug #356555 (make unmatched argument package name search case-
+  insensitive). There's also a fix for the repoman variable.usedwithhelpers
+  check, to prevent false matches inside quoted strings. Bug #349307 tracks
+  all bugs fixed since 2.1.9.25.
+
+  01 Mar 2011; Zac Medico <zmedico@gentoo.org> -portage-2.1.9.40.ebuild,
+  -portage-2.2.0_alpha24.ebuild:
+  Remove old versions.
+
+  25 Feb 2011; Zac Medico <zmedico@gentoo.org> portage-9999.ebuild:
+  Fix broken doexe call with all symlinks.
+
+*portage-2.2.0_alpha25 (22 Feb 2011)
+
+  22 Feb 2011; Zac Medico <zmedico@gentoo.org> +portage-2.2.0_alpha25.ebuild:
+  2.2.0_alpha25 version bump. This includes all of the fixes in
+  portage-2.1.9.41. Bug #210077 tracks all bugs fixed since portage-2.1.x.
+
+*portage-2.1.9.41 (22 Feb 2011)
+
+  22 Feb 2011; Zac Medico <zmedico@gentoo.org> +portage-2.1.9.41.ebuild:
+  2.1.9.41 version bump. This fixes bug #269534 (omit 'null' category from
+  umatched atoms for --unmerge), bug #354787 (suggest --depclean after world
+  updates), bug #355447 (support post_emerge hook), bug #355621 (repoman
+  variable.usedwithhelpers false positives), bug #355629 (REQUIRED_USE
+  malformed syntax message for missing IUSE), bug #355635 (make EAPI 4
+  default_src_install conform to PMS for empty DOC setting), and bug #355803
+  (fix plurality of emerge 'config files need updating' message).
+  Bug #349307 tracks all bugs fixed since 2.1.9.25.
+
+  22 Feb 2011; Zac Medico <zmedico@gentoo.org> -portage-2.1.9.35.ebuild,
+  -portage-2.1.9.39.ebuild, -portage-2.2.0_alpha19.ebuild,
+  -portage-2.2.0_alpha23.ebuild:
+  Remove old versions.
+
+*portage-2.2.0_alpha24 (15 Feb 2011)
+
+  15 Feb 2011; Zac Medico <zmedico@gentoo.org> +portage-2.2.0_alpha24.ebuild:
+  2.2.0_alpha24 version bump. This includes all of the fixes in
+  portage-2.1.9.40. Bug #210077 tracks all bugs fixed since portage-2.1.x.
+
+*portage-2.1.9.40 (15 Feb 2011)
+
+  15 Feb 2011; Zac Medico <zmedico@gentoo.org> +portage-2.1.9.40.ebuild:
+  2.1.9.40 version bump. This fixes bug #353933 (distorted virtual atoms in
+  unsatisfied dep messages), bug #354387 (ebuild.1 man page references
+  BUILD_PREFIX instead of PORTAGE_TMPDIR), bug #354437 (cross-reference
+  --newuse and --reinstall=changed-use), bug #354441 (regression causing
+  unnecessary reinstall of binary packages), bug #354685 (repoman
+  variable.usedwithhelpers errors triggered by comments), bug #354687
+  (egencache -update-use-local-desc error handling tweaks), and bug #354747
+  (unsatisfied dep messages should show packages scheduled for merge when
+  possible). Bug #349307 tracks all bugs fixed since 2.1.9.25.
+
+*portage-2.2.0_alpha23 (08 Feb 2011)
+
+  08 Feb 2011; Zac Medico <zmedico@gentoo.org> -portage-2.2.0_alpha22.ebuild,
+  +portage-2.2.0_alpha23.ebuild:
+  2.2.0_alpha23 version bump. This includes all of the fixes in
+  portage-2.1.9.39. Bug #210077 tracks all bugs fixed since portage-2.1.x.
+
+*portage-2.1.9.39 (08 Feb 2011)
+
+  08 Feb 2011; Zac Medico <zmedico@gentoo.org> -portage-2.1.9.38.ebuild,
+  +portage-2.1.9.39.ebuild:
+  2.1.9.39 version bump. This fixes bug #354057 (test failure involving
+  ENODATA on FreeBSD), bug #354137 (clarify emerge man page description
+  of package arguments), and bug #354141 (support paths starting with
+  ../ for emerge package arguments). This also fixes a regression in
+  2.1.9.38 which can cause emerge to crash with an AttributeError.
+  Bug #349307 tracks all bugs fixed since 2.1.9.25.
+
+  08 Feb 2011; Zac Medico <zmedico@gentoo.org> portage-9999.ebuild:
+  Prefer python3 if both python2 and python3 are enabled.
+
+  08 Feb 2011; Zac Medico <zmedico@gentoo.org> portage-9999.ebuild,
+  metadata.xml:
+  Support USE=python2, for cases in which portage dependencies such as
+  libselinux only work with python2.
+
+*portage-2.2.0_alpha22 (08 Feb 2011)
+
+  08 Feb 2011; Zac Medico <zmedico@gentoo.org> +portage-2.2.0_alpha22.ebuild:
+  2.2.0_alpha22 version bump. This includes all of the fixes in
+  portage-2.1.9.38. Bug #210077 tracks all bugs fixed since portage-2.1.x.
+
+*portage-2.1.9.38 (08 Feb 2011)
+
+  08 Feb 2011; Zac Medico <zmedico@gentoo.org> +portage-2.1.9.38.ebuild:
+  2.1.9.38 version bump. This fixes bug #354003 (equery crashes with
+  InvalidDependString triggered by EAPI 4 USE dep default atoms).
+  Bug #349307 tracks all bugs fixed since 2.1.9.25.
+
+  08 Feb 2011; Zac Medico <zmedico@gentoo.org> -portage-2.1.9.36.ebuild,
+  -portage-2.1.9.37.ebuild, -portage-2.2.0_alpha20.ebuild,
+  -portage-2.2.0_alpha21.ebuild:
+  Remove old versions.
+
+*portage-2.2.0_alpha21 (07 Feb 2011)
+
+  07 Feb 2011; Zac Medico <zmedico@gentoo.org> +portage-2.2.0_alpha21.ebuild:
+  2.2.0_alpha21 version bump. This includes all of the fixes in
+  portage-2.1.9.37.
+
+*portage-2.1.9.37 (07 Feb 2011)
+
+  07 Feb 2011; Zac Medico <zmedico@gentoo.org> +portage-2.1.9.37.ebuild:
+  2.1.9.37 version bump. This fixes bug #353836 (test failure without
+  python[sqlite]) and bug #353897 (fix default_src_test to work with
+  EAPI 4). Bug #349307 tracks all bugs fixed since 2.1.9.25.
+
+  06 Feb 2011; Zac Medico <zmedico@gentoo.org> portage-2.1.8.3.ebuild,
+  portage-2.1.9.25.ebuild, portage-2.1.9.35.ebuild, portage-2.1.9.36.ebuild,
+  portage-2.2.0_alpha19.ebuild, portage-2.2.0_alpha20.ebuild,
+  portage-9999.ebuild:
+  Update libselinux deps to require USE=python.
+
+*portage-2.2.0_alpha20 (05 Feb 2011)
+
+  05 Feb 2011; Zac Medico <zmedico@gentoo.org> +portage-2.2.0_alpha20.ebuild:
+  2.2.0_alpha20 version bump. This includes all of the fixes in
+  portage-2.1.9.36, and also includes a fix for a backtracking regression
+  in the master branch since 2.2_rc92. Bug #210077 tracks all bugs fixed
+  since portage-2.1.x.
+
+*portage-2.1.9.36 (05 Feb 2011)
+
+  05 Feb 2011; Zac Medico <zmedico@gentoo.org> +portage-2.1.9.36.ebuild:
+  2.1.9.36 version bump. This fixes bug #353234 (reduce noise in REQUIRED_USE
+  messages), bug #353239 (regression in SIGINT handling during fetch),
+  bug #353443 (REQUIRED_USE triggers erroneous warings about world file),
+  and bug #353613 (dropped dependencies in rare cases). Bug #349307 tracks
+  all bugs fixed since 2.1.9.25.
+
+  29 Jan 2011; Zac Medico <zmedico@gentoo.org> -portage-2.1.9.33.ebuild,
+  -portage-2.1.9.34.ebuild, -portage-2.2.0_alpha17.ebuild,
+  -portage-2.2.0_alpha18.ebuild:
+  Remove old versions.
+
+*portage-2.2.0_alpha19 (22 Jan 2011)
+
+  22 Jan 2011; Zac Medico <zmedico@gentoo.org> +portage-2.2.0_alpha19.ebuild:
+  2.2.0_alpha19 version bump. This includes all of the fixes in
+  portage-2.1.9.35. Bug #210077 tracks all bugs fixed since portage-2.1.x.
+
+*portage-2.1.9.35 (22 Jan 2011)
+
+  22 Jan 2011; Zac Medico <zmedico@gentoo.org> +portage-2.1.9.35.ebuild:
+  2.1.9.35 version bump. This fixes bug #287648 (logging via pty with
+  python3). Bug #349307 tracks all bugs fixed since 2.1.9.25.
+
+*portage-2.2.0_alpha18 (19 Jan 2011)
+
+  19 Jan 2011; Zac Medico <zmedico@gentoo.org> +portage-2.2.0_alpha18.ebuild:
+  2.2.0_alpha18 version bump. This includes all of the fixes in
+  portage-2.1.9.34. Bug #210077 tracks all bugs fixed since portage-2.1.x.
+
+*portage-2.1.9.34 (19 Jan 2011)
+
+  19 Jan 2011; Zac Medico <zmedico@gentoo.org> +portage-2.1.9.34.ebuild:
+  2.1.9.34 version bump. This fixes bug #315603 (restrict default
+  archive-dir permissions), bug #349070 (document/initialize FFLAGS and
+  FCFLAGS), bug #351505 ($A undefined for pkg_nofetch), and bug #351828
+  (regression in || dep handling when installed package is masked).
+  Bug #349307 tracks all bugs fixed since 2.1.9.25.
+
+  19 Jan 2011; Zac Medico <zmedico@gentoo.org> -portage-2.1.9.24.ebuild,
+  -portage-2.1.9.31.ebuild, -portage-2.2.0_alpha15.ebuild:
+  Remove old versions.
+
+*portage-2.2.0_alpha17 (18 Jan 2011)
+
+  18 Jan 2011; Zac Medico <zmedico@gentoo.org> -portage-2.2.0_alpha16.ebuild,
+  +portage-2.2.0_alpha17.ebuild:
+  2.2.0_alpha17 version bump. This includes all of the fixes in
+  portage-2.1.9.33. Bug #210077 tracks all bugs fixed since portage-2.1.x.
+
+*portage-2.1.9.33 (18 Jan 2011)
+
+  18 Jan 2011; Zac Medico <zmedico@gentoo.org> -portage-2.1.9.32.ebuild,
+  +portage-2.1.9.33.ebuild:
+  2.1.9.33 version bump. This completes the fix for bug #351505 (Ensure $A is
+  defined for pkg_nofetch) which was only partially fixed in the previous
+  release. Bug #349307 tracks all bugs fixed since 2.1.9.25.
+
+*portage-2.2.0_alpha16 (18 Jan 2011)
+
+  18 Jan 2011; Zac Medico <zmedico@gentoo.org> +portage-2.2.0_alpha16.ebuild:
+  2.2.0_alpha16 version bump. This includes all of the fixes in
+  portage-2.1.9.32. Bug #210077 tracks all bugs fixed since portage-2.1.x.
+
+*portage-2.1.9.32 (18 Jan 2011)
+
+  18 Jan 2011; Zac Medico <zmedico@gentoo.org> +portage-2.1.9.32.ebuild:
+  2.1.9.32 version bump. This fixes bug #351505 (Ensure $A is defined for
+  pkg_nofetch) and bug #351814 (handle malformed sym entries in old
+  CONTENTS). Bug #349307 tracks all bugs fixed since 2.1.9.25.
+
+*portage-2.2.0_alpha15 (12 Jan 2011)
+
+  12 Jan 2011; Zac Medico <zmedico@gentoo.org> +portage-2.2.0_alpha15.ebuild:
+  2.2.0_alpha15 version bump. This includes all of the fixes in
+  portage-2.1.9.31. Bug #210077 tracks all bugs fixed since portage-2.1.x.
+
+*portage-2.1.9.31 (12 Jan 2011)
+
+  12 Jan 2011; Zac Medico <zmedico@gentoo.org> +portage-2.1.9.31.ebuild:
+  2.1.9.31 version bump. This fixes bug #211529 (econf looks in configure
+  --help output for disable-dependency-tracking in EAPI 4). Bug #349307
+  tracks all bugs fixed since 2.1.9.25.
+
+  12 Jan 2011; Zac Medico <zmedico@gentoo.org> -portage-2.1.9.29.ebuild,
+  -portage-2.1.9.30.ebuild, -portage-2.2.0_alpha13.ebuild,
+  -portage-2.2.0_alpha14.ebuild:
+  Remove old versions.
+
+*portage-2.2.0_alpha14 (07 Jan 2011)
+
+  07 Jan 2011; Zac Medico <zmedico@gentoo.org> +portage-2.2.0_alpha14.ebuild:
+  2.2.0_alpha14 version bump. This includes all of the fixes in
+  portage-2.1.9.30. Bug #210077 tracks all bugs fixed since portage-2.1.x.
+
+*portage-2.1.9.30 (07 Jan 2011)
+
+  07 Jan 2011; Zac Medico <zmedico@gentoo.org> +portage-2.1.9.30.ebuild:
+  2.1.9.30 version bump. This adds support for USE flag display when
+  REQUIRED_USE is unsatisfied, and emerge-webrsync support xz snapshots.
+  Bug #349307 tracks all bugs fixed since 2.1.9.25.
+
+  07 Jan 2011; Zac Medico <zmedico@gentoo.org> -portage-2.1.9.26.ebuild,
+  -portage-2.1.9.27.ebuild, -portage-2.1.9.28.ebuild,
+  -portage-2.2.0_alpha9.ebuild, -portage-2.2.0_alpha10.ebuild,
+  -portage-2.2.0_alpha11.ebuild, -portage-2.2.0_alpha12.ebuild:
+  Remove old versions.
+
+*portage-2.2.0_alpha13 (05 Jan 2011)
+
+  05 Jan 2011; Zac Medico <zmedico@gentoo.org> +portage-2.2.0_alpha13.ebuild:
+  2.2.0_alpha13 version bump. This includes all of the fixes in
+  portage-2.1.9.29. Bug #210077 tracks all bugs fixed since portage-2.1.x.
+
+*portage-2.1.9.29 (05 Jan 2011)
+
+  05 Jan 2011; Zac Medico <zmedico@gentoo.org> +portage-2.1.9.29.ebuild:
+  2.1.9.29 version bump. This fixes bug #350254 (prevent missed updates
+  due to REQUIRED_USE) and bug 350488 (regression in || dep handling for
+  masked installed packages). Bug #349307 tracks all bugs fixed since
+  2.1.9.25.
+
+*portage-2.2.0_alpha12 (03 Jan 2011)
+
+  03 Jan 2011; Zac Medico <zmedico@gentoo.org> +portage-2.2.0_alpha12.ebuild:
+  2.2.0_alpha12 version bump. This includes all of the fixes in
+  portage-2.1.9.28. Bug #210077 tracks all bugs fixed since portage-2.1.x.
+
+*portage-2.1.9.28 (03 Jan 2011)
+
+  03 Jan 2011; Zac Medico <zmedico@gentoo.org> +portage-2.1.9.28.ebuild:
+  2.1.9.28 version bump. This fixes bug #350285 (depclean newer slots
+  masked by keywords), bug #350379 (fix prefix in elog syslog messages),
+  and bug #350385 (newins broken in EAPI 4). This also includes
+  documentation for bug #322049 (use_with/enable empty third arg handling
+  in EAPI 4). Bug #349307 tracks all bugs fixed since 2.1.9.25.
+
+  02 Jan 2011; Raúl Porcel <armin76@gentoo.org> portage-2.1.9.25.ebuild:
+  alpha/ia64/m68k/s390/sh/sparc stable wrt #349098
+
+*portage-2.2.0_alpha11 (31 Dec 2010)
+
+  31 Dec 2010; Zac Medico <zmedico@gentoo.org> +portage-2.2.0_alpha11.ebuild:
+  2.2.0_alpha11 version bump. This includes all of the fixes in
+  portage-2.1.9.27. Bug #210077 tracks all bugs fixed since portage-2.1.x.
+
+*portage-2.1.9.27 (31 Dec 2010)
+
+  31 Dec 2010; Zac Medico <zmedico@gentoo.org> +portage-2.1.9.27.ebuild:
+  2.1.9.27 version bump. This fixes bug #289486 (prevent SIGQUIT
+  interference with sandbox), bug #338744 (endless broken pipe loop when
+  unpacking zip files), bug #348864 (bail out if Manifest is missing
+  distfiles digests), bug #349757 (handle EPERM when trying to unmerge a
+  directory that is a mount point), bug #350045 (doins -r fails for some
+  file names), and bug #53607 (anydbm cache module fails with multiple
+  processes). This release also includes support for EAPI 4, which has
+  been recently approved by the Gentoo Council. Refer to the PMS EAPI
+  Cheat Sheet, portage's html docs installed with USE=doc, or
+  `man 5 ebuild` for more info about EAPI 4. Bug #349307 tracks all bugs
+  fixed since 2.1.9.25.
+
+  31 Dec 2010; Zac Medico <zmedico@gentoo.org> -portage-2.2.0_alpha6.ebuild,
+  -portage-2.2.0_alpha7.ebuild, -portage-2.2.0_alpha8.ebuild:
+  Remove old versions.
+
+  28 Dec 2010; Markus Meier <maekke@gentoo.org> portage-2.1.9.25.ebuild:
+  arm stable, bug #349098
+
+  27 Dec 2010; Brent Baude <ranger@gentoo.org> portage-2.1.9.25.ebuild:
+  Marking portage-2.1.9.25 ppc64 for bug 349098
+
+  27 Dec 2010; Brent Baude <ranger@gentoo.org> portage-2.1.9.24.ebuild:
+  Marking portage-2.1.9.24 ppc64 for bug 346819
+
+  27 Dec 2010; Brent Baude <ranger@gentoo.org> portage-2.1.9.24.ebuild:
+  Marking portage-2.1.9.24 ppc64 for bug 346819
+
+  24 Dec 2010; Jeroen Roovers <jer@gentoo.org> portage-2.1.9.25.ebuild:
+  Stable for HPPA PPC (bug #349098).
+
+*portage-2.2.0_alpha10 (21 Dec 2010)
+
+  21 Dec 2010; Zac Medico <zmedico@gentoo.org> +portage-2.2.0_alpha10.ebuild:
+  2.2.0_alpha10 version bump. This fixes bug #349273 (backward compatibility
+  api fix for doebuild) and includes various other minor fixes that are also
+  included in portage-2.1.9.26. Bug #210077 tracks all bugs fixed since
+  portage-2.1.x.
+
+*portage-2.1.9.26 (21 Dec 2010)
+
+  21 Dec 2010; Zac Medico <zmedico@gentoo.org> +portage-2.1.9.26.ebuild:
+  2.1.9.26 version bump. This fixes bug #338509 (quickpkg creates broken
+  0 byte hardlinks), bug #339670 (avoid ELOOP due to circular symlink in
+  $T), bug #346847 (broken QA_PREBUILT to QA_EXECSTACK mapping), bug #348460
+  (fix regression in xterm title reset when PROMPT_COMMAND is unset), and
+  bug #348561 (etc-update option to save example config). Bug #349307 tracks
+  all bugs fixed since 2.1.9.25.
+
+  20 Dec 2010; Pawel Hajdan jr <phajdan.jr@gentoo.org>
+  portage-2.1.9.25.ebuild:
+  x86 stable wrt bug #349098
+
+  20 Dec 2010; Markos Chandras <hwoarang@gentoo.org> portage-2.1.9.25.ebuild:
+  Stable on amd64 wrt bug #349098
+
+*portage-2.2.0_alpha9 (16 Dec 2010)
+
+  16 Dec 2010; Zac Medico <zmedico@gentoo.org> +portage-2.2.0_alpha9.ebuild:
+  2.2.0_alpha9 version bump. This fixes bug #339670 (avoid ELOOP due to
+  circular symlink in $T) and bug #348389 (AttributeError triggered by
+  SLOT conflict). Bug #210077 tracks all bugs fixed since 2.1.x.
+
+*portage-2.2.0_alpha8 (13 Dec 2010)
+
+  13 Dec 2010; Zac Medico <zmedico@gentoo.org> +portage-2.2.0_alpha8.ebuild:
+  2.2.0_alpha8 version bump. This fixes bug #338509 (quickpkg creates broken
+  0 byte hardlinks), bug #348460 (fix regression in xterm title reset when
+  PROMPT_COMMAND is unset), and bug #348561 (etc-update option to save
+  example config). Bug #210077 tracks all bugs fixed since 2.1.x.
+
+  13 Dec 2010; Zac Medico <zmedico@gentoo.org> -portage-2.2.0_alpha4.ebuild,
+  -portage-2.2.0_alpha5.ebuild:
+  Remove old versions.
+
+*portage-2.2.0_alpha7 (06 Dec 2010)
+
+  06 Dec 2010; Zac Medico <zmedico@gentoo.org> +portage-2.2.0_alpha7.ebuild:
+  2.2.0_alpha7 version bump. This adds MERGE_TYPE support to EAPI 4_pre1
+  (bug #347351), fixes QA_PREBUILT to QA_EXECSTACK mapping (bug #346847),
+  and has various minor fixes for EAPI 4_pre1. Bug #210077 tracks all bugs
+  fixed since 2.1.x.
+
+  28 Nov 2010; Zac Medico <zmedico@gentoo.org> -portage-2.1.7.17.ebuild,
+  -portage-2.2_rc67.ebuild, -portage-2.2.0_alpha3.ebuild:
+  Remove old versions.
+
+*portage-2.2.0_alpha6 (27 Nov 2010)
+
+  27 Nov 2010; Zac Medico <zmedico@gentoo.org> +portage-2.2.0_alpha6.ebuild:
+  2.2.0_alpha6 version bump. This includes all of the fixes in
+  portage-2.1.9.25. Bug #210077 tracks all bugs fixed since 2.1.x.
+
+*portage-2.1.9.25 (27 Nov 2010)
+
+  27 Nov 2010; Zac Medico <zmedico@gentoo.org> +portage-2.1.9.25.ebuild:
+  2.1.9.25 version bump. This fixes bug #315421 (proxy settings don't work
+  sometimes), bug #344845 (regenworld AttributeError), bug #345097 (slot
+  conflict display shows malformed atoms), bug #345289 (^C traceback),
+  bug #345979 (broken handling of USE deps for masked USE flags), and
+  bug #346349 (accept 'y' for emerge options that accept 'n). Bug #346909
+  tracks all bugs fixed since 2.1.9.24.
+
+*portage-2.1.8.3 (10 Mar 2010)
+
+  10 Mar 2010; Zac Medico <zmedico@gentoo.org> +portage-2.1.8.3.ebuild:
+  2.1.8.3 version bump. This fixes bug #303567 (generate implicit libc
+  dependencies) and also fixes emerge crash due to ImportError when
+  downgrading portage. Bug #307597 tracks all bugs fixed since
+  portage-2.1.7.x.
+
+*portage-2.1.7.17 (29 Jan 2010)
+
+  29 Jan 2010; Zac Medico <zmedico@gentoo.org> +portage-2.1.7.17.ebuild:
+  2.1.7.17 bump. This fixes bug #269225 (repoman check for virtual HOMEPAGE
+  and LICENSE), bug #296700 (EAPI 3 support), bug #298310 (AttributeError
+  when generating manifest on selinux systems), bug #299248 (fix doins to
+  fail in more cases), bug #300378 (don't export FILESDIR during depend
+  phase), bug #300388 (handle TERM=dumb), bug #300744 (make quickpkg exclude
+  CONTENTS from xpak), bug #301926 (ValueError triggered by corrupt manifest),
+  and bug #302005 (remove broken __main__ code from sets module). Bug #302803
+  tracks all bugs fixed since portage-2.1.7.16. Note that this is the first
+  release with support for EAPI 3.
+
+*portage-2.1.7.16 (24 Dec 2009)
+
+  24 Dec 2009; Zac Medico <zmedico@gentoo.org> +portage-2.1.7.16.ebuild:
+  2.1.7.16 bump. This fixes bug #297364 (make ebuild.sh interfere with PATH
+  less), bug #297541 (repoman upstream.workaround check for no-as-needed),
+  and bug #297933 (filter BASHOPTS for bash-4.1). Bug #288499 tracks all
+  bugs fixed since 2.1.6.x.
+
+*portage-2.1.6.13 (03 May 2009)
+
+  03 May 2009; Zac Medico <zmedico@gentoo.org> +portage-2.1.6.13.ebuild:
+  2.1.6.13 bump. This fixes bug #268398 (document econf automatic die)
+  and bug #267104 (handle insufficient space interaction with userfetch).
+  Bug #268228 tracks all bugs fixed since 2.1.6.11.
