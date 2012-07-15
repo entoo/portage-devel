@@ -1,6 +1,6 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-apps/portage/portage-2.2.0_alpha89.ebuild,v 1.3 2012/06/13 06:11:55 zmedico Exp $
+# $Header: /var/cvsroot/gentoo-x86/sys-apps/portage/portage-2.2.0_alpha117.ebuild,v 1.1 2012/07/12 21:26:54 zmedico Exp $
 
 # Require EAPI 2 since we now require at least python-2.6 (for python 3
 # syntax support) which also requires EAPI 2.
@@ -10,18 +10,21 @@ inherit eutils multilib python
 DESCRIPTION="Portage is the package management and distribution system for Gentoo"
 HOMEPAGE="http://www.gentoo.org/proj/en/portage/index.xml"
 LICENSE="GPL-2"
-KEYWORDS="~sparc-fbsd ~x86-fbsd"
+KEYWORDS="~amd64-fbsd ~sparc-fbsd ~x86-fbsd"
 SLOT="0"
 IUSE="build doc epydoc +ipc linguas_pl pypy1_9 python2 python3 selinux xattr"
 
 # Import of the io module in python-2.6 raises ImportError for the
 # thread module if threading is disabled.
-python_dep="python3? ( =dev-lang/python-3* )
+python_dep_ssl="python3? ( =dev-lang/python-3*[ssl] )
 	!pypy1_9? ( !python2? ( !python3? (
-		|| ( >=dev-lang/python-2.7 dev-lang/python:2.6[threads] )
+		|| ( >=dev-lang/python-2.7[ssl] dev-lang/python:2.6[threads,ssl] )
 	) ) )
-	pypy1_9? ( !python2? ( !python3? ( dev-python/pypy:1.9[bzip2] ) ) )
-	python2? ( !python3? ( || ( dev-lang/python:2.7 dev-lang/python:2.6[threads] ) ) )"
+	pypy1_9? ( !python2? ( !python3? ( dev-python/pypy:1.9[bzip2,ssl] ) ) )
+	python2? ( !python3? ( || ( dev-lang/python:2.7[ssl] dev-lang/python:2.6[ssl,threads] ) ) )"
+python_dep="${python_dep_ssl//\[ssl\]}"
+python_dep="${python_dep//,ssl}"
+python_dep="${python_dep//ssl,}"
 
 # The pysqlite blocker is for bug #282760.
 DEPEND="${python_dep}
@@ -33,10 +36,13 @@ DEPEND="${python_dep}
 # quite slow, so it's not considered in the dependencies as an alternative to
 # to python-3.3 / pyxattr. Also, xattr support is only tested with Linux, so
 # for now, don't pull in xattr deps for other kernels.
+# For whirlpool hash, require python[ssl] or python-mhash (bug #425046).
 RDEPEND="${python_dep}
 	!build? ( >=sys-apps/sed-4.0.5
 		>=app-shells/bash-3.2_p17
-		>=app-admin/eselect-1.2 )
+		>=app-admin/eselect-1.2
+		|| ( ${python_dep_ssl} dev-python/python-mhash )
+	)
 	elibc_FreeBSD? ( sys-freebsd/freebsd-bin )
 	elibc_glibc? ( >=sys-apps/sandbox-2.2 )
 	elibc_uclibc? ( >=sys-apps/sandbox-2.2 )
@@ -66,7 +72,7 @@ prefix_src_archives() {
 
 PV_PL="2.1.2"
 PATCHVER_PL=""
-TARBALL_PV=2.2.0_alpha88
+TARBALL_PV=2.2.0_alpha111
 SRC_URI="mirror://gentoo/${PN}-${TARBALL_PV}.tar.bz2
 	$(prefix_src_archives ${PN}-${TARBALL_PV}.tar.bz2)
 	linguas_pl? ( mirror://gentoo/${PN}-man-pl-${PV_PL}.tar.bz2
@@ -210,148 +216,55 @@ src_prepare() {
 			|| die "failed to append to make.globals"
 	fi
 
+	cd "${S}/cnf" || die
+	if [ -f "make.conf.${ARCH}".diff ]; then
+		patch make.conf "make.conf.${ARCH}".diff || \
+			die "Failed to patch make.conf.example"
+	else
+		eerror ""
+		eerror "Portage does not have an arch-specific configuration for this arch."
+		eerror "Please notify the arch maintainer about this issue. Using generic."
+		eerror ""
+	fi
+
+	# BSD and OSX need a sed wrapper so that find/xargs work properly
+	if use userland_GNU; then
+		rm -f "${S}"/bin/ebuild-helpers/sed || \
+			die "Failed to remove sed wrapper"
+	fi
 }
 
 src_compile() {
 	if use doc; then
-		cd "${S}"/doc
-		touch fragment/date
-		make xhtml xhtml-nochunks || die "failed to make docs"
+		emake docbook || die
 	fi
 
 	if use epydoc; then
 		einfo "Generating api docs"
-		mkdir "${WORKDIR}"/api
-		local my_modules epydoc_opts=""
-		my_modules="$(find "${S}/pym" -name "*.py" \
-			| sed -e 's:/__init__.py$::' -e 's:\.py$::' -e "s:^${S}/pym/::" \
-			 -e 's:/:.:g' | sort)" || die "error listing modules"
-		# workaround for bug 282760
-		> "$S/pym/pysqlite2.py"
-		PYTHONPATH=${S}/pym:${PYTHONPATH:+:}${PYTHONPATH} \
-			epydoc -o "${WORKDIR}"/api \
-			-qqqqq --no-frames --show-imports $epydoc_opts \
-			--name "${PN}" --url "${HOMEPAGE}" \
-			${my_modules} || die "epydoc failed"
-		rm "$S/pym/pysqlite2.py"
+		emake epydoc || die
 	fi
 }
 
 src_test() {
 	# make files executable, in case they were created by patch
 	find bin -type f | xargs chmod +x
-	./pym/portage/tests/runTests || die "test(s) failed"
+	emake test || die
 }
 
 src_install() {
-	local libdir=$(get_libdir)
-	local portage_base="/usr/${libdir}/portage"
-	local portage_share_config=/usr/share/portage/config
+	emake DESTDIR="${D}" \
+		sysconfdir="${EPREFIX}/etc" \
+		prefix="${EPREFIX}/usr" \
+		libdir="${EPREFIX}/usr/$(get_libdir)" \
+		install || die
 
-	cd "${S}"/cnf
-	insinto /etc
-	doins etc-update.conf dispatch-conf.conf || die
+	# Use dodoc for compression, since the Makefile doesn't do that.
+	dodoc "${S}"/{ChangeLog,NEWS,RELEASE-NOTES} || die
 
-	insinto "$portage_share_config/sets"
-	doins "$S"/cnf/sets/*.conf || die
-	insinto "$portage_share_config"
-	doins "$S/cnf/make.globals" || die
-	if [ -f "make.conf.${ARCH}".diff ]; then
-		patch make.conf "make.conf.${ARCH}".diff || \
-			die "Failed to patch make.conf.example"
-		newins make.conf make.conf.example || die
-	else
-		eerror ""
-		eerror "Portage does not have an arch-specific configuration for this arch."
-		eerror "Please notify the arch maintainer about this issue. Using generic."
-		eerror ""
-		newins make.conf make.conf.example || die
-	fi
-
-	dosym ..${portage_share_config}/make.globals /etc/make.globals
-
-	insinto /etc/logrotate.d
-	doins "${S}"/cnf/logrotate.d/elog-save-summary || die
-
-	# BSD and OSX need a sed wrapper so that find/xargs work properly
-	if use userland_GNU; then
-		rm "${S}"/bin/ebuild-helpers/sed || die "Failed to remove sed wrapper"
-	fi
-
-	local x symlinks files
-
-	cd "$S" || die "cd failed"
-	for x in $(find bin -type d) ; do
-		exeinto $portage_base/$x || die "exeinto failed"
-		cd "$S"/$x || die "cd failed"
-		files=$(find . -mindepth 1 -maxdepth 1 -type f ! -type l)
-		if [ -n "$files" ] ; then
-			doexe $files || die "doexe failed"
-		fi
-		symlinks=$(find . -mindepth 1 -maxdepth 1 -type l)
-		if [ -n "$symlinks" ] ; then
-			cp -P $symlinks "$ED$portage_base/$x" || die "cp failed"
-		fi
-	done
-
-	cd "$S" || die "cd failed"
-	for x in $(find pym/* -type d ! -path "pym/portage/tests*") ; do
-		insinto $portage_base/$x || die "insinto failed"
-		cd "$S"/$x || die "cd failed"
-		# __pycache__ directories contain no py files
-		[[ "*.py" != $(echo *.py) ]] || continue
-		doins *.py || die "doins failed"
-		symlinks=$(find . -mindepth 1 -maxdepth 1 -type l)
-		if [ -n "$symlinks" ] ; then
-			cp -P $symlinks "$ED$portage_base/$x" || die "cp failed"
-		fi
-	done
-
-	# We install some minimal tests for use as a preinst sanity check.
-	# These tests must be able to run without a full source tree and
-	# without relying on a previous portage instance being installed.
-	cd "$S" || die "cd failed"
-	exeinto $portage_base/pym/portage/tests || die
-	doexe pym/portage/tests/runTests || die
-	insinto $portage_base/pym/portage/tests || die
-	doins pym/portage/tests/*.py || die
-	insinto $portage_base/pym/portage/tests/lint || die
-	doins pym/portage/tests/lint/*.py || die
-	doins pym/portage/tests/lint/__test__ || die
-
-	# Symlinks to directories cause up/downgrade issues and the use of these
-	# modules outside of portage is probably negligible.
-	for x in "${ED}${portage_base}/pym/"{cache,elog_modules} ; do
-		[ ! -L "${x}" ] && continue
-		die "symlink to directory will cause upgrade/downgrade issues: '${x}'"
-	done
-
-	doman "${S}"/man/*.[0-9]
 	if use linguas_pl; then
-		doman -i18n=pl "${S_PL}"/man/pl/*.[0-9]
-		doman -i18n=pl_PL.UTF-8 "${S_PL}"/man/pl_PL.UTF-8/*.[0-9]
+		doman -i18n=pl "${S_PL}"/man/pl/*.[0-9] || die
+		doman -i18n=pl_PL.UTF-8 "${S_PL}"/man/pl_PL.UTF-8/*.[0-9] || die
 	fi
-
-	dodoc "${S}"/{ChangeLog,NEWS,RELEASE-NOTES}
-	use doc && dohtml -r "${S}"/doc/*
-	use epydoc && dohtml -r "${WORKDIR}"/api
-
-	dodir /usr/bin
-	for x in ebuild egencache emerge portageq quickpkg repoman ; do
-		dosym ../${libdir}/portage/bin/${x} /usr/bin/${x}
-	done
-
-	dodir /usr/sbin
-	local x
-	for x in archive-conf dispatch-conf emaint emerge-webrsync env-update \
-		etc-update fixpackages regenworld ; do
-		dosym ../${libdir}/portage/bin/${x} /usr/sbin/${x}
-	done
-	dosym env-update /usr/sbin/update-env
-	dosym etc-update /usr/sbin/update-etc
-
-	dodir /etc/portage
-	keepdir /etc/portage
 }
 
 pkg_preinst() {
@@ -378,12 +291,10 @@ pkg_preinst() {
 		ewarn "to enable RMD160 hash support."
 		ewarn "See bug #198398 for more information."
 	fi
-	if [ -f "${EROOT}/etc/make.globals" ]; then
+	if [[ ! -L "${EROOT}/etc/make.globals" &&
+		-f "${EROOT}/etc/make.globals" ]]; then
 		rm "${EROOT}/etc/make.globals"
 	fi
-
-	has_version "<${CATEGORY}/${PN}-2.2_alpha" \
-		&& MINOR_UPGRADE=true || MINOR_UPGRADE=false
 
 	has_version "<=${CATEGORY}/${PN}-2.2_pre5" \
 		&& WORLD_MIGRATION_UPGRADE=true || WORLD_MIGRATION_UPGRADE=false
@@ -394,9 +305,6 @@ pkg_preinst() {
 		! ( [ -e "${EROOT}"var/lib/portage/preserved_libs_registry ] && \
 		has_version ">=${CATEGORY}/${PN}-2.1.6_rc" ) \
 		&& NEEDED_REBUILD_UPGRADE=true || NEEDED_REBUILD_UPGRADE=false
-
-	[[ -n $PORTDIR_OVERLAY ]] && has_version "<${CATEGORY}/${PN}-2.1.6.12" \
-		&& REPO_LAYOUT_CONF_WARN=true || REPO_LAYOUT_CONF_WARN=false
 }
 
 pkg_postinst() {
@@ -404,7 +312,8 @@ pkg_postinst() {
 	# will be identified and removed in postrm.
 	python_mod_optimize /usr/$(get_libdir)/portage/pym
 
-	if $WORLD_MIGRATION_UPGRADE ; then
+	if $WORLD_MIGRATION_UPGRADE && \
+		grep -q "^@" "${EROOT}/var/lib/portage/world"; then
 		einfo "moving set references from the worldfile into world_sets"
 		cd "${EROOT}/var/lib/portage/"
 		grep "^@" world >> world_sets
@@ -428,24 +337,6 @@ pkg_postinst() {
 				done < "${cpv}/NEEDED"
 			fi
 		done
-	fi
-
-	if $REPO_LAYOUT_CONF_WARN ; then
-		ewarn
-		echo "If you want overlay eclasses to override eclasses from" \
-			"other repos then see the portage(5) man page" \
-			"for information about the new layout.conf and repos.conf" \
-			"configuration files." \
-			| fmt -w 75 | while read -r ; do ewarn "$REPLY" ; done
-		ewarn
-	fi
-
-	if $MINOR_UPGRADE ; then
-		elog "If you're upgrading from a pre-2.2 version of portage you might"
-		elog "want to remerge world (emerge -e world) to take full advantage"
-		elog "of some of the new features in 2.2."
-		elog "This is not required however for portage to function properly."
-		elog
 	fi
 }
 
